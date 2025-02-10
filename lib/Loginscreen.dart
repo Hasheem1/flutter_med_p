@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_med_p/SignUp.dart';
-
 import 'Customizedwidget/logintxtform.dart';
+
 import 'HomeScreen.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -15,18 +15,20 @@ class _LoginscreenState extends State<Loginscreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isObscured = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(width: double.infinity,height: double.infinity,
-        decoration: BoxDecoration(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage("https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),// Path to your image
+            image: NetworkImage(
+                "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
             fit: BoxFit.fill,
-            // Cover the entire screen
           ),
-
         ),
         child: SafeArea(
           child: Form(
@@ -36,22 +38,32 @@ class _LoginscreenState extends State<Loginscreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(height: 25,),
-                    Text("WELCOME TO", style: TextStyle(color: Colors.white,fontSize: 20)),
-                    Text("PLAY FOOTBALL JO",style: TextStyle(color: Colors.white,fontSize: 20),),
-                    SizedBox(height: 50),
-
-                    Text("Login ", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.white)),
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 180),
-                      child: Text("Lets Get Started ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25,color: Colors.white)),
+                    const SizedBox(height: 25),
+                    const Text("WELCOME TO",
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    const Text("PLAY FOOTBALL JO",
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    const SizedBox(height: 50),
+                    const Text("Login",
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 180),
+                      child: Text("Let's Get Started",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: Colors.white)),
                     ),
-                    logintxtform(
+                    LoginTxtForm(
                       controller: _emailController,
                       hint: "example@domain.com",
-                      lbl: "Email or Mobile ",
-                      preIcon:Icon(Icons.email,color: Colors.white,),
+                      lbl: "Email or Mobile",
+                      preIcon: const Icon(Icons.email, color: Colors.white),
+
                       v: (value) {
                         if (!emailValidation(value!)) {
                           return "Not valid";
@@ -59,76 +71,70 @@ class _LoginscreenState extends State<Loginscreen> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
-                    logintxtform(
+                    const SizedBox(height: 20),
+                    LoginTxtForm(
                       controller: _passwordController,
                       hint: "******",
                       lbl: "Password",
-                      sufIcon: Icon(Icons.remove_red_eye_outlined,color: Colors.white,),
+                      preIcon: const Icon(Icons.lock, color: Colors.white),
+
                       v: (value) {
                         if (!passValidation(value!)) {
-                          return "Not valid";
+                          return "Password is not valid";
                         }
                         return null;
                       },
-                      preIcon: Icon(Icons.lock,color: Colors.white,),
-
                     ),
-                    SizedBox(height: 5),
-
-                    Padding(
-                      padding: const EdgeInsets.only(left: 250),
-                      child: Text("Forget password?",style: TextStyle(color: Colors.white),),
+                    const SizedBox(height: 5),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 250),
+                      child: Text("Forget password?",
+                          style: TextStyle(color: Colors.white)),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
-                        padding: EdgeInsets.only(left: 170, right: 170, top: 15, bottom: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 170, vertical: 15),
                       ),
                       onPressed: () {
-
-
-
-                            if (_formKey.currentState!.validate()) {
-                          setState(() {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => Homescreen()
-                                ));
-                          }
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => Homescreen()),
                           );
-
-
-
                         }
                       },
-                      child: Text("Login ",
+                      child: const Text("Login",
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.only(left: 50),
                       child: Row(
                         children: [
-                          Text("Dont Have an account ? ",
-                              style:
-                              TextStyle(fontSize: 20, color: Colors.white)),
-                          TextButton(onPressed: (){
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => Screen1()),
-                            );
-                          }, child: Text("Sign up",style: TextStyle(color: Colors.orange, fontSize: 20),)),
-
-                          SizedBox(
-                            height: 10,
-                          )
+                          const Text("Don't Have an account?",
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.white)),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => Screen1()),
+                              );
+                            },
+                            child: const Text("Sign up",
+                                style: TextStyle(
+                                    color: Colors.orange, fontSize: 20)),
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 180),
+                    const SizedBox(height: 180),
                   ],
                 ),
               ),

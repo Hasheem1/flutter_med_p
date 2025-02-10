@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'Loginscreen.dart';
 
 class Homescreen extends StatefulWidget {
@@ -37,35 +36,39 @@ class _HomescreenState extends State<Homescreen> {
     },
   ];
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-
         children: [
+          // Background image container
           Container(
             width: double.infinity,
             height: double.infinity,
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(
-                    "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
+                  "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg",
+                ),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Column(
             children: [
-               SizedBox(height: 10),
+              const SizedBox(height: 10),
               Expanded(
                 child: SizedBox(
                   height: 350, // Allows only 3 items to be visible at a time
                   child: ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(),
                     itemCount: stadiums.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 50, horizontal: 20),
                         child: Row(
                           children: [
                             Container(
@@ -73,101 +76,150 @@ class _HomescreenState extends State<Homescreen> {
                               height: 100,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(stadiums[index]["image"]!),
+                                  image: NetworkImage(
+                                      stadiums[index]["image"]!),
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                             SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Expanded(
                               child: Text(
                                 stadiums[index]["name"]!,
-                                style:  TextStyle(
-                                    color: Colors.orange,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  color: Colors.orange,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             ElevatedButton(
-                              onPressed: () {},
-                              child:  Text("BOOK"),
+                              onPressed: () {
+                                showSnackBar(context);
+                              },
+                              child: const Text("BOOK"),
                             ),
                           ],
                         ),
-                        
                       );
-                      
-                      
                     },
                   ),
                 ),
               ),
-
-
-                   Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 73),
-                        child: IconButton(onPressed: (){
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => Loginscreen()),
-
-                          ); },color: Colors.white,iconSize: 40,hoverColor: Colors.orange, icon: Icon(Icons.login_outlined,)
-
-                        ),
-                      ),
-
-
-
-                    Padding(
-                      padding: const EdgeInsets.only(left: 85),
-                      child: IconButton(onPressed: (
-
-                          ){
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => Homescreen()),
-
-                        ); },color: Colors.white,iconSize: 40,hoverColor: Colors.orange, icon: Icon(Icons.home,)
-
-                      ),
-                    ),
-                      Padding(
-                        padding: const EdgeInsets.only(left:70 ),
-                        child: IconButton(onPressed: (){
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => Homescreen()),
-
-                          ); },color: Colors.white,iconSize: 40,hoverColor: Colors.orange, icon: Icon(Icons.favorite,)
-
-                        ),
-                      )
-                  ],
-                   ),
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 82,bottom: 20),
-                    child: Text("Log Out",style: TextStyle(color: Colors.orange[200],fontWeight: FontWeight.bold,fontSize: 18),),
+                    padding: const EdgeInsets.only(left: 73),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => Loginscreen()),
+                        );
+                      },
+                      color: Colors.white,
+                      iconSize: 40,
+                      hoverColor: Colors.orange,
+                      icon: const Icon(Icons.login_outlined),
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 70,bottom: 20),
-                    child: Text("Home",style: TextStyle(color: Colors.orange[200],fontWeight: FontWeight.bold,fontSize: 18),),
+                    padding: const EdgeInsets.only(left: 85),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const Homescreen()),
+                        );
+                      },
+                      color: Colors.white,
+                      iconSize: 40,
+                      hoverColor: Colors.orange,
+                      icon: const Icon(Icons.home),
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 70,bottom: 20),
-                    child: Text("Favorite",style: TextStyle(color: Colors.orange[200],fontWeight: FontWeight.bold,fontSize: 18,),),
+                    padding: const EdgeInsets.only(left: 70),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const Homescreen()),
+                        );
+                      },
+                      color: Colors.white,
+                      iconSize: 40,
+                      hoverColor: Colors.orange,
+                      icon: const Icon(Icons.favorite),
+                    ),
                   )
-
                 ],
-
-              )
-
-
-              
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(left: 82, bottom: 20),
+                    child: Text(
+                      "Log Out",
+                      style: TextStyle(
+                        color: Colors.orange[200],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(left: 70, bottom: 20),
+                    child: Text(
+                      "Home",
+                      style: TextStyle(
+                        color: Colors.orange[200],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(left: 70, bottom: 20),
+                    child: Text(
+                      "Favorite",
+                      style: TextStyle(
+                        color: Colors.orange[200],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ],
       ),
     );
   }
+  void showSnackBar(BuildContext context) {
+    final snackBar = SnackBar(backgroundColor: Colors.yellow[400],
+      content: Center(
+        child: Row(children:
+        [SizedBox(width: 20,), Icon(Icons.check,color: Colors.green,size: 40,applyTextScaling: true,
+        ),
+          SizedBox(width: 120,),
+        Text('Stadium booked',style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold,backgroundColor: Colors.yellow[300],
+        ),
+        ),
+        ],
+        ),
+      ),
+      duration: Duration(seconds: 2),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+
 }

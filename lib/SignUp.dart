@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Customizedwidget/logintxtform.dart';
 import 'HomeScreen.dart';
-import 'Loginscreen.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1({super.key});
@@ -42,7 +41,7 @@ class _Screen1State extends State<Screen1> {
                       style: TextStyle(color: Colors.orange, fontSize: 40),
                     ),
                     SizedBox(height: 30),
-                    logintxtform(
+                    LoginTxtForm(
                       controller: _emailController,
                       hint: "example@domain.com",
                       lbl: "Email or Mobile ",
@@ -58,14 +57,11 @@ class _Screen1State extends State<Screen1> {
                       },
                     ),
                     SizedBox(height: 30),
-                    logintxtform(
+                    LoginTxtForm(
                       controller: _passwordController,
                       hint: "******",
                       lbl: "Password",
-                      sufIcon: Icon(
-                        Icons.remove_red_eye_outlined,
-                        color: Colors.white,
-                      ),
+
                       v: (value) {
                         if (!passValidation(value!)) {
                           return "Password must contain at least 8 characters, including a number, an uppercase letter, and a special character.";
@@ -78,14 +74,11 @@ class _Screen1State extends State<Screen1> {
                       ),
                     ),
                     SizedBox(height: 30),
-                    logintxtform(
+                    LoginTxtForm(
                       controller: _confirmPasswordController,
                       hint: "******",
                       lbl: "Confirm Password",
-                      sufIcon: Icon(
-                        Icons.remove_red_eye_outlined,
-                        color: Colors.white,
-                      ),
+
                       v: (value) {
                         if (!passValidation(value!)) {
                           return "Password must contain at least 8 characters, including a number, an uppercase letter, and a special character.";
