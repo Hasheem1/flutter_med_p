@@ -5,7 +5,20 @@ import 'Customizedwidget/logintxtform.dart';
 import 'HomeScreen.dart';
 
 class Loginscreen extends StatefulWidget {
-  const Loginscreen({super.key});
+  final String name;
+  final String age;
+  final String position;
+  final String rate;
+  final String proOrNo;
+
+  const Loginscreen({
+    super.key,
+    required this.name,
+    required this.age,
+    required this.position,
+    required this.rate,
+    required this.proOrNo,
+  });
 
   @override
   State<Loginscreen> createState() => _LoginscreenState();
@@ -23,7 +36,7 @@ class _LoginscreenState extends State<Loginscreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
                 "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
@@ -102,7 +115,7 @@ class _LoginscreenState extends State<Loginscreen> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => Homescreen()),
+                                builder: (context) => Homescreen(name: "",age:"" ,position: "",proOrNo: "",rate: "",)),
                           );
                         }
                       },

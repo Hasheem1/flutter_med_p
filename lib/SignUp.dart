@@ -109,7 +109,7 @@ class _Screen1State extends State<Screen1> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => Homescreen()),
+                                builder: (context) => Homescreen(name: "",age:"" ,position: "",proOrNo: "",rate: "",)),
                           );
                         }
                       },

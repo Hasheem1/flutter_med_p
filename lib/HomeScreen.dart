@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'Customizedwidget/UsersData.dart';
 import 'Loginscreen.dart';
+import 'displayData.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+  final String name;
+  final String age;
+  final String position;
+  final String rate;
+  final String proOrNo;
 
+  const Homescreen({
+    super.key,
+    required this.name,
+    required this.age,
+    required this.position,
+    required this.rate,
+    required this.proOrNo,
+  });
   @override
   State<Homescreen> createState() => _HomescreenState();
 }
@@ -43,7 +57,6 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background image container
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -53,6 +66,7 @@ class _HomescreenState extends State<Homescreen> {
                   "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg",
                 ),
                 fit: BoxFit.cover,
+                opacity: 0.7
               ),
             ),
           ),
@@ -109,27 +123,27 @@ class _HomescreenState extends State<Homescreen> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 73),
+                    padding: const EdgeInsets.only(left: 25),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(
-                              builder: (context) => Loginscreen()),
+                            builder: (context) =>
+                                DisplayData(Data(widget.name, widget.age, widget.position, widget.rate, widget.proOrNo)),
+                          ),
                         );
                       },
-                      color: Colors.white,
-                      iconSize: 40,
-                      hoverColor: Colors.orange,
-                      icon: const Icon(Icons.login_outlined),
+                      icon: Icon(Icons.account_circle, size: 40, color: Colors.white,),hoverColor: Colors.orange,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 85),
+                    padding: const EdgeInsets.only(left: 70),
                     child: IconButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) => const Homescreen()),
+                              builder: (context) =>  Homescreen(name: "", age: "", position: "", rate: "", proOrNo: "")),
                         );
                       },
                       color: Colors.white,
@@ -144,7 +158,7 @@ class _HomescreenState extends State<Homescreen> {
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) => const Homescreen()),
+                              builder: (context) =>  Homescreen(name: "", age: "", position: "", rate: "", proOrNo: "")),
                         );
                       },
                       color: Colors.white,
@@ -152,16 +166,32 @@ class _HomescreenState extends State<Homescreen> {
                       hoverColor: Colors.orange,
                       icon: const Icon(Icons.favorite),
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 65),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => Loginscreen(age:"" ,name: "",position: "",proOrNo: "",rate: "", )),
+                        );
+                      },
+                      color: Colors.white,
+                      iconSize: 40,
+                      hoverColor: Colors.orange,
+                      icon: const Icon(Icons.logout),
+                    ),
+                  ),
+
                 ],
               ),
               Row(
                 children: [
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 82, bottom: 20),
+                    const EdgeInsets.only(left: 25, bottom: 20),
                     child: Text(
-                      "Log Out",
+                      "Profile",
                       style: TextStyle(
                         color: Colors.orange[200],
                         fontWeight: FontWeight.bold,
@@ -171,7 +201,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 70, bottom: 20),
+                    const EdgeInsets.only(left: 75, bottom: 20),
                     child: Text(
                       "Home",
                       style: TextStyle(
@@ -193,6 +223,17 @@ class _HomescreenState extends State<Homescreen> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20,left: 50),
+                    child: Text(
+                      "Log Out",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.orange[200],),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+
+
+
                 ],
               ),
             ],

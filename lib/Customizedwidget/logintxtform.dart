@@ -22,7 +22,7 @@ class LoginTxtForm extends StatefulWidget {
 }
 
 class _LoginTxtFormState extends State<LoginTxtForm> {
-  bool _isObscured = true;
+  bool _isObscured = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _LoginTxtFormState extends State<LoginTxtForm> {
                 });
               },
               icon: Icon(
-                _isObscured ? Icons.visibility_off : Icons.visibility,
+                _isObscured ? Icons.visibility : Icons.visibility_off,
                 color: Colors.white,
               ),
             ),
