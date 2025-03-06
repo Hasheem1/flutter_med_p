@@ -58,8 +58,11 @@ class _OnborardainscreenState extends State<Onborardainscreen> {
 
             islastpage?
 
-            GestureDetector(child: Container(decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),height: 40,width: 130,
-                child: Center(child: Text("Get Started ",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),))),onTap:(){
+            GestureDetector(child: Padding(
+              padding: const EdgeInsets.only(right: 50),
+              child: Container(decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),height: 40,width: 130,
+                  child: Center(child: Text("Get Started ",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),))),
+            ),onTap:(){
               _controller.nextPage(duration:Duration(microseconds: 300) ,curve:Curves.bounceIn );
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo")), (route)=>false);},)
                 :
