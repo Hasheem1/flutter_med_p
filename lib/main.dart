@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_med_p/userInfo.dart';
-
 import 'Customizedwidget/logintxtform.dart';
-import 'HomeScreen.dart';
-import 'Loginscreen.dart';
-import 'displayData.dart';
+import 'SignUp_LogIn/Login.dart';
+import 'SplashScreen/SplashScreen.dart';
+import 'onBoardingScreen/BoardingScreen1.dart';
+import 'onBoardingScreen/BoardingScreen2.dart';
+import 'onBoardingScreen/BoardingScreen3.dart';
+import 'onBoardingScreen/OnBorardainScreen.dart';
 
 void main (){
   runApp(Myapp());
@@ -16,9 +17,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
-   //   home: Homescreen(rate: "",proOrNo: "",position: "",name: "",age: "",) ,
-home: UserInfo(),
+      home: Splashscreen(),
     );
   }
 }

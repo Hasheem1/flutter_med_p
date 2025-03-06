@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_med_p/SignUp.dart';
-import 'Customizedwidget/logintxtform.dart';
+import '../Customizedwidget/logintxtform.dart';
+import '../HomeScreen/HomeScreen.dart';
+import 'SignUp.dart';
 
-import 'HomeScreen.dart';
 
 class Loginscreen extends StatefulWidget {
   final String name;
@@ -115,7 +115,7 @@ class _LoginscreenState extends State<Loginscreen> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => Homescreen(name: "",age:"" ,position: "",proOrNo: "",rate: "",)),
+                                builder: (context) => Homescreen(name: "hashem",age:"20" ,position: "CM",proOrNo: "PRO",rate: "8.7",)),
                           );
                         }
                       },
@@ -137,7 +137,7 @@ class _LoginscreenState extends State<Loginscreen> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => Screen1()),
+                                    builder: (context) => Screen1(name: "hashem",age:"20" ,position: "CM",proOrNo: "PRO",rate: "8.7",)),
                               );
                             },
                             child: const Text("Sign up",

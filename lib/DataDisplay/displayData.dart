@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_med_p/userInfo.dart';
+import '../Customizedwidget/UsersData.dart';
+import '../HomeScreen/HomeScreen.dart';
+import '../SignUp_LogIn/Login.dart';
 
-import 'Customizedwidget/UsersData.dart';
-import 'HomeScreen.dart';
-import 'Loginscreen.dart';
-class DisplayData extends StatelessWidget {
+class DisplayData extends StatefulWidget {
+
+
 
   final Data data;
 
   const DisplayData(this.data);
 
   @override
+  State<DisplayData> createState() => _DisplayDataState();
+}
+
+class _DisplayDataState extends State<DisplayData> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(body: Container(
       decoration: BoxDecoration(image: DecorationImage(image: NetworkImage("https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
-    fit: BoxFit.fill )
+          fit: BoxFit.fill )
       ),width: double.infinity,height: double.infinity,
       child: Padding(
         padding: const EdgeInsets.only(right: 20),
@@ -36,15 +42,15 @@ class DisplayData extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8,top: 130,bottom: 25),
+                  padding: const EdgeInsets.only(left: 8,top: 50,bottom: 25),
                   child: Container(width:400,decoration: BoxDecoration(color:Colors.orangeAccent,border: Border.all(color: Colors.black,width: 3
                   ),
                   ),
-                  child: Center(
-                    child: Text("Name:${data.name}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
-                  ),
-                  ),
-                  ),
+                    child: Center(
+                      child: Text("Name:${widget.data.name}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
+                      ),
+                      ),
+                    ),
                   ),
                 ),
 
@@ -54,7 +60,7 @@ class DisplayData extends StatelessWidget {
                   ),
                   ),
                     child: Center(
-                      child: Text("Age:${data.age}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
+                      child: Text("Age:${widget.data.age}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
                       ),
                       ),
                     ),
@@ -66,7 +72,7 @@ class DisplayData extends StatelessWidget {
                   ),
                   ),
                     child: Center(
-                      child: Text("Position:${data.playerPosition}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
+                      child: Text("Position:${widget.data.playerPosition}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
                       ),
                       ),
                     ),
@@ -78,7 +84,7 @@ class DisplayData extends StatelessWidget {
                   ),
                   ),
                     child: Center(
-                      child: Text("rating:${data.playerRate}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
+                      child: Text("rating:${widget.data.playerRate}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
                       ),
                       ),
                     ),
@@ -90,14 +96,14 @@ class DisplayData extends StatelessWidget {
                   ),
                   ),
                     child: Center(
-                      child: Text("player status :${data.inTeam}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
+                      child: Text("player status :${widget.data.inTeam}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
                       ),
                       ),
                     ),
 
                   ),
                 ),
-                  SizedBox(height: 30,),
+                SizedBox(height: 30,),
                 Row(
                   children: [
                     SizedBox(width: 170,),
@@ -139,8 +145,8 @@ class DisplayData extends StatelessWidget {
         ),
       ),
     ),
-      
-      
+
+
 
 
     );

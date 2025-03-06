@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Customizedwidget/UsersData.dart';
-import 'Loginscreen.dart';
-import 'displayData.dart';
+import '../Customizedwidget/UsersData.dart';
+import '../DataDisplay/displayData.dart';
+import '../SignUp_LogIn/Login.dart';
+
 
 class Homescreen extends StatefulWidget {
   final String name;
@@ -66,7 +67,6 @@ class _HomescreenState extends State<Homescreen> {
                   "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg",
                 ),
                 fit: BoxFit.cover,
-                opacity: 0.7
               ),
             ),
           ),
@@ -143,7 +143,7 @@ class _HomescreenState extends State<Homescreen> {
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) =>  Homescreen(name: "", age: "", position: "", rate: "", proOrNo: "")),
+                              builder: (context) =>  Homescreen(name: "hashem",age:"20" ,position: "CM",proOrNo: "PRO",rate: "8.7",)),
                         );
                       },
                       color: Colors.white,
@@ -158,7 +158,7 @@ class _HomescreenState extends State<Homescreen> {
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) =>  Homescreen(name: "", age: "", position: "", rate: "", proOrNo: "")),
+                              builder: (context) =>  Homescreen(name: widget.name,age:widget.age ,position: widget.position,proOrNo: widget.proOrNo,rate: widget.rate,)),
                         );
                       },
                       color: Colors.white,
@@ -173,7 +173,7 @@ class _HomescreenState extends State<Homescreen> {
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) => Loginscreen(age:"" ,name: "",position: "",proOrNo: "",rate: "", )),
+                              builder: (context) => Loginscreen(name: "hashem",age:"20" ,position: "CM",proOrNo: "PRO",rate: "8.7",)),
                         );
                       },
                       color: Colors.white,
@@ -249,17 +249,17 @@ class _HomescreenState extends State<Homescreen> {
         [SizedBox(width: 20,), Icon(Icons.check,color: Colors.green,size: 40,applyTextScaling: true,
         ),
           SizedBox(width: 120,),
-        Text('Stadium booked',style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold,backgroundColor: Colors.yellow[300],
-        ),
-        ),
+          Text('Stadium booked',style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold,backgroundColor: Colors.yellow[300],
+          ),
+          ),
         ],
         ),
       ),
       duration: Duration(seconds: 2),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
 
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
 

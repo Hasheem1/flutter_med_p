@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
-import 'Customizedwidget/logintxtform.dart';
-import 'HomeScreen.dart';
+import '../Customizedwidget/logintxtform.dart';
+import '../HomeScreen/HomeScreen.dart';
 
 class Screen1 extends StatefulWidget {
-  const Screen1({super.key});
+  final String name;
+  final String age;
+  final String position;
+  final String rate;
+  final String proOrNo;
 
+  const Screen1({
+    super.key,
+    required this.name,
+    required this.age,
+    required this.position,
+    required this.rate,
+    required this.proOrNo,
+  });
   @override
   State<Screen1> createState() => _Screen1State();
 }
 
 class _Screen1State extends State<Screen1> {
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -86,7 +99,7 @@ class _Screen1State extends State<Screen1> {
                         if (_confirmPasswordController.text != _passwordController.text) {
 
                           return "Passwords do not match.";
-                          
+
                         }
                         return null;
                       },
@@ -109,7 +122,7 @@ class _Screen1State extends State<Screen1> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => Homescreen(name: "",age:"" ,position: "",proOrNo: "",rate: "",)),
+                                builder: (context) => Homescreen(name: widget.name,age:widget.age ,position: widget.position,proOrNo: widget.proOrNo,rate: widget.rate,)),
                           );
                         }
                       },
