@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_med_p/DataDisplay/DataCollect.dart';
 import '../Customizedwidget/logintxtform.dart';
 import '../HomeScreen/HomeScreen.dart';
 import 'SignUp.dart';
@@ -32,16 +33,17 @@ class _LoginscreenState extends State<Loginscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.black,
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration:  BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(
-                "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
-            fit: BoxFit.fill,
-          ),
+        decoration:  BoxDecoration(color: Color(0xFF030E2F),borderRadius: BorderRadius.circular(0),
+
+          // image: DecorationImage(
+          //   image: NetworkImage(
+          //       "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
+          //   fit: BoxFit.fill,
+          // ),
         ),
         child: SafeArea(
           child: Form(
@@ -52,17 +54,17 @@ class _LoginscreenState extends State<Loginscreen> {
                 child: Column(
                   children: [
                     const SizedBox(height: 25),
-                    const Text("WELCOME TO",
-                        style: TextStyle(color: Colors.white, fontSize: 20)),
-                    const Text("PLAY FOOTBALL JO",
-                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                   // const Text("WELCOME TO",
+                    //    style: TextStyle(color: Colors.white, fontSize: 20)),
+                   // const Text("PLAY FOOTBALL JO",
+                   //     style: TextStyle(color: Colors.white, fontSize: 20)),
                     const SizedBox(height: 50),
                     const Text("Login",
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 80),
                     const Padding(
                       padding: EdgeInsets.only(right: 180),
                       child: Text("Let's Get Started",
@@ -115,7 +117,7 @@ class _LoginscreenState extends State<Loginscreen> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => Homescreen(name: "hashem",age:"20" ,position: "CM",proOrNo: "PRO",rate: "8.7",)),
+                                builder: (context) => UserInfo()),
                           );
                         }
                       },

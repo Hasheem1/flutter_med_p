@@ -32,12 +32,13 @@ class _Screen1State extends State<Screen1> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(
-                "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
-            fit: BoxFit.fill,
-          ),
+        decoration: BoxDecoration(            color: Color(0xFF030E2F),
+
+          // image: DecorationImage(
+          //   image: NetworkImage(
+          //       "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
+          //   fit: BoxFit.fill,
+          // ),
         ),
         child: Center(
           child: Form(
