@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_med_p/HomeScreen/toledoDetails.dart';
+import '../Customizedwidget/HomeContainer.dart';
 import '../Customizedwidget/UsersData.dart';
-import '../DataDisplay/displayData.dart';
 import '../SignUp_LogIn/Login.dart';
+import 'HashemDetails.dart';
+import 'YarmoukDetails.dart';
 
 
 class Homescreen extends StatefulWidget {
@@ -27,249 +30,72 @@ class _HomescreenState extends State<Homescreen> {
 
   bool FavIconpressd = false;
   Color IconColor = Colors.white;
-/*
-  final List<Map<String, String>> stadiums = [
-    {
-      "name": "yarmouk  ",
-      "image": "https://media.istockphoto.com/id/1440483244/photo/soccer-stadium-ball-center-midfield.jpg?s=612x612&w=0&k=20&c=oxcLffTMo4KRVq5kCtBXbLRZTPwn7RRxcKlYgIooU_U="
-    },
-    {
-      "name": "alattar",
-      "image": "https://cdn.sourceflow.co.uk/woydyrnv5b2v444kq6c1gy8k57jg"
-    },
-    {
-      "name": "hashem",
-      "image": "https://images.unsplash.com/photo-1486286701208-1d58e9338013?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb3RiYWxsJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww"
-    },
-    {
-      "name": "toledo",
-      "image": "https://t4.ftcdn.net/jpg/00/97/44/57/360_F_97445702_faYBL0ObQgGxnUOahUiIzY1w2mnJ2g4Y.jpg"
-    },
-    {
-      "name": "king abdullah",
-      "image": "https://www.shutterstock.com/shutterstock/videos/3515853341/thumb/1.jpg?ip=x480"
-    },
-    {
-      "name": "tabaria",
-      "image": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zm9vdGJhbGwlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww"
-    },
-  ];
-*/
 
+
+  final List<Map<String, String>> ImageTextList = [
+    {
+      "networkImage":
+      "https://scontent.famm11-1.fna.fbcdn.net/v/t1.6435-9/94032904_1524340027734437_4014256780518359040_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=_JVYOGs3JioQ7kNvgE3d-A6&_nc_oc=Adi7zljpT6vkDVlba6-fnvGccZDDV1IDyQnclPRsfDcx53rDb5gAq3VaI-0UqPLGnVJbKHSxt4IVa3Z7GFERKx3Q&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=pFFUKAej-JLwOGv1zsKCUg&oh=00_AYGci6Z17sZC_Dmv4-BGvG6223_W5gJKFA-XgVKStZJt7w&oe=67FE8CE6",
+
+      "text": "Hashem stadium "
+    },
+    {
+      "networkImage":
+      "https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/458086784_1965552490554654_4256384242845382440_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=iSKl3uYmGP0Q7kNvgFjzbMq&_nc_oc=Adm5QTpEOmX6SX3P4a-aAwBFDysKFpHvyPFA_PwBEW-YQ_D1erOZ8DN8KLxpodMy24PxcvKf2-UvdxiaI5HMEYC0&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=pSmluyzpEvNH4-Jb6SHptA&oh=00_AYF91yARbDGMPN923nyG0rmST4tls64PKcPrJfNyJBuxKw&oe=67E3AA6C",
+      "text": "Toledo stadium "
+    },
+    {
+      "networkImage":
+      "https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/464447981_8535832423173037_5287080858927625173_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=uSmXFTzAAN0Q7kNvgF1idRd&_nc_oc=AdnupC4mrUg1s3fK8D8mKx1SxYwAqysyDeyC48UIFCgNs4MuMIJ5Ea61ezepXHSI-BanMfQ5RideYMtL8F2U0hAd&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=TNVLql6HTnbPJoMk7chsMg&oh=00_AYHpDTJn4opOPz2e2jRQ1XZCDh4MMt2LMchpaGXqJEu9Rg&oe=67E37F20",
+      "text": "Yarmouk Stadium "
+    },
+
+
+
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body:
-          Container(
+      Container(
+
         decoration:  BoxDecoration(color: Color(0xFF030E2F),borderRadius: BorderRadius.circular(0),),
-            child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-               SizedBox(height: 10,),
-                Text("Home",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white), ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
 
-                Container(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),border: Border.all(color: Colors.white)),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                          image: DecorationImage(
-                            image: NetworkImage("https://t4.ftcdn.net/jpg/00/97/44/57/360_F_97445702_faYBL0ObQgGxnUOahUiIzY1w2mnJ2g4Y.jpg"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Text("yarmouk",
-                          style:  TextStyle(
-                            color: Color(0xFF94e3a8),
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        children: [SizedBox(height:25 ,),
-                          ElevatedButton(
-                            onPressed: () {
-                              showSnackBar(context);
-                            },
-                            child:  Text("Details" ,style: TextStyle(fontSize: 20),),
-                          ),
-                          IconButton(onPressed: () {
-                            setState(() {
-                              FavIconpressd = !FavIconpressd;
-                              IconColor = FavIconpressd ? Colors.red : Colors.white;
-                            });
-                          }, icon: Icon(Icons.favorite, color: IconColor, size: 40))
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
 
-                Expanded(
-                  child: Align(alignment: Alignment.bottomCenter,
-                    child: Container(width: double.infinity,height: 100,
-                      alignment: Alignment.bottomCenter,decoration: BoxDecoration(color: Color(0xFF94e3a8),borderRadius: BorderRadius.circular(50)),
-                      padding: EdgeInsets.only(bottom: 10), // Adds some space at the bottom
-                       child: Expanded(
-                        child: Align(alignment: Alignment.bottomCenter,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Spreads the icons evenly
-                            children: [
-                          
-                              Column(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              DisplayData(Data(widget.name, widget.age, widget.position, widget.rate, widget.proOrNo)),
-                                        ),
-                                      );
-                                    },
-                                    icon: Icon(Icons.account_circle, size: 40, color: Colors.white),
-                                    hoverColor: Colors.orange,
-                                  ),
-                                  Text(
-                                    "Profile",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (context) => Homescreen(
-                                              name: "hashem",
-                                              age: "20",
-                                              position: "CM",
-                                              proOrNo: "PRO",
-                                              rate: "8.7",
-                                            )),
-                                      );
-                                    },
-                                    color: Colors.white,
-                                    iconSize: 40,
-                                    hoverColor: Colors.orange,
-                                    icon: const Icon(Icons.home),
-                                  ),
-                                  Text(
-                                    "Home",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (context) => Homescreen(
-                                              name: widget.name,
-                                              age: widget.age,
-                                              position: widget.position,
-                                              proOrNo: widget.proOrNo,
-                                              rate: widget.rate,
-                                            )),
-                                      );
-                                    },
-                                    color: Colors.white,
-                                    iconSize: 40,
-                                    hoverColor: Colors.orange,
-                                    icon: const Icon(Icons.favorite),
-                                  ),
-                                  Text(
-                                    "Favorite",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (context) => Loginscreen(
-                                              name: "hashem",
-                                              age: "20",
-                                              position: "CM",
-                                              proOrNo: "PRO",
-                                              rate: "8.7",
-                                            )),
-                                      );
-                                    },
-                                    color: Colors.white,
-                                    iconSize: 40,
-                                    hoverColor: Colors.orange,
-                                    icon: const Icon(Icons.logout),
-                                  ),
-                                  Text(
-                                    "Log Out",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
+            SizedBox(height: 10,),
+            Text("Home",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white), ),
+
+            Expanded(flex: 5,
+              child: ListView.builder(itemBuilder:(context, index) {
+                return   HomeContainer(
+                  networkImage: ImageTextList[index]["networkImage"]!,
+                  text: ImageTextList[index]["text"]!,
+                  targetScreen: switch (index) {
+                    0 => HashemDetails(),
+                    1 => ToledoDetails(),
+                    _ => YarmoukDetails(),
+
+                  },
+                );
+
+
+
+
+              },
+                itemCount: ImageTextList.length ,
+              ),
             ),
-          ),
-
-    );
-  }
-  void showSnackBar(BuildContext context) {
-    final snackBar = SnackBar(backgroundColor: Colors.yellow[400],
-      content: Center(
-        child: Row(children:
-        [SizedBox(width: 20,), Icon(Icons.check,color: Colors.green,size: 40,applyTextScaling: true,
-        ),
-          SizedBox(width: 120,),
-          Text('Stadium booked',style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold,backgroundColor: Colors.yellow[300],
-          ),
-          ),
-        ],
+          ],
         ),
       ),
-      duration: Duration(seconds: 2),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
 
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
 
 
 }

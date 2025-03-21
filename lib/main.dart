@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_med_p/Customizedwidget/UsersData.dart';
+import 'Admin/AdminPassword.dart';
+import 'Admin/AdminProparties.dart';
+import 'BottomNavigetionBar/BottomNavigetionBar.dart';
+import 'Customizedwidget/imageSlider.dart';
 import 'Customizedwidget/logintxtform.dart';
-import 'DataDisplay/DataCollect.dart';
-import 'DataDisplay/displayData.dart';
+import 'HomeScreen/FavoriteScreen.dart';
+import 'HomeScreen/HashemDetails.dart';
 import 'HomeScreen/HomeScreen.dart';
+import 'HomeScreen/YarmoukDetails.dart';
+import 'HomeScreen/toledoDetails.dart';
+import 'ShowDialog/AddStadium.dart';
 import 'SignUp_LogIn/Login.dart';
 import 'SignUp_LogIn/enterState.dart';
 import 'SplashScreen/SplashScreen.dart';
@@ -22,7 +29,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splashscreen(),
+      home: SnakeNavigationBarExampleScreen(),
     );
   }
 }

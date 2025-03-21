@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Customizedwidget/logintxtform.dart';
+import '../Data/DataCollect.dart';
 import '../HomeScreen/HomeScreen.dart';
 
 class Screen1 extends StatefulWidget {
@@ -33,12 +34,6 @@ class _Screen1State extends State<Screen1> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(            color: Color(0xFF030E2F),
-
-          // image: DecorationImage(
-          //   image: NetworkImage(
-          //       "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
-          //   fit: BoxFit.fill,
-          // ),
         ),
         child: Center(
           child: Form(
@@ -123,7 +118,7 @@ class _Screen1State extends State<Screen1> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => Homescreen(name: widget.name,age:widget.age ,position: widget.position,proOrNo: widget.proOrNo,rate: widget.rate,)),
+                                builder: (context) => UserInfo()),
                           );
                         }
                       },

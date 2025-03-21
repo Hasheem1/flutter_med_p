@@ -31,7 +31,7 @@ class _LoginTxtFormState extends State<LoginTxtForm> {
       style: TextStyle(color: Colors.white, fontSize: 27),
       cursorColor: Colors.white,
       validator: widget.v,
-      obscureText: _isObscured, // Use the state variable
+      obscureText: _isObscured,
       decoration: InputDecoration(
         label: Text(widget.lbl, style: TextStyle(color: Colors.white)),
         prefixIcon: widget.preIcon,

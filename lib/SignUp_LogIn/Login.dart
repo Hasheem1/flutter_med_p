@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_med_p/DataDisplay/DataCollect.dart';
 import '../Customizedwidget/logintxtform.dart';
+import '../Data/DataCollect.dart';
 import '../HomeScreen/HomeScreen.dart';
 import 'SignUp.dart';
 
@@ -39,33 +39,24 @@ class _LoginscreenState extends State<Loginscreen> {
         height: double.infinity,
         decoration:  BoxDecoration(color: Color(0xFF030E2F),borderRadius: BorderRadius.circular(0),
 
-          // image: DecorationImage(
-          //   image: NetworkImage(
-          //       "https://c0.wallpaperflare.com/preview/244/499/764/green-sports-court-illustration.jpg"),
-          //   fit: BoxFit.fill,
-          // ),
         ),
         child: SafeArea(
           child: Form(
             key: _formKey,
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding:  EdgeInsets.all(10),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SizedBox(height: 25),
-                   // const Text("WELCOME TO",
-                    //    style: TextStyle(color: Colors.white, fontSize: 20)),
-                   // const Text("PLAY FOOTBALL JO",
-                   //     style: TextStyle(color: Colors.white, fontSize: 20)),
-                    const SizedBox(height: 50),
-                    const Text("Login",
+
+                     SizedBox(height: 50),
+                     Text("Login",
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)),
-                    const SizedBox(height: 80),
-                    const Padding(
+                     SizedBox(height: 80),
+                     Padding(
                       padding: EdgeInsets.only(right: 180),
                       child: Text("Let's Get Started",
                           style: TextStyle(
@@ -77,7 +68,7 @@ class _LoginscreenState extends State<Loginscreen> {
                       controller: _emailController,
                       hint: "example@domain.com",
                       lbl: "Email or Mobile",
-                      preIcon: const Icon(Icons.email, color: Colors.white),
+                      preIcon:  Icon(Icons.email, color: Colors.white),
 
                       v: (value) {
                         if (!emailValidation(value!)) {
@@ -86,12 +77,12 @@ class _LoginscreenState extends State<Loginscreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20),
                     LoginTxtForm(
                       controller: _passwordController,
                       hint: "******",
                       lbl: "Password",
-                      preIcon: const Icon(Icons.lock, color: Colors.white),
+                      preIcon:  Icon(Icons.lock, color: Colors.white),
 
                       v: (value) {
                         if (!passValidation(value!)) {
@@ -100,17 +91,17 @@ class _LoginscreenState extends State<Loginscreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 5),
-                    const Padding(
+                     SizedBox(height: 5),
+                     Padding(
                       padding: EdgeInsets.only(left: 250),
                       child: Text("Forget password?",
                           style: TextStyle(color: Colors.white)),
                     ),
-                    const SizedBox(height: 10),
+                     SizedBox(height: 10),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
-                        padding: const EdgeInsets.symmetric(
+                        padding:  EdgeInsets.symmetric(
                             horizontal: 170, vertical: 15),
                       ),
                       onPressed: () {
@@ -121,18 +112,18 @@ class _LoginscreenState extends State<Loginscreen> {
                           );
                         }
                       },
-                      child: const Text("Login",
+                      child:  Text("Login",
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50),
+                      padding:  EdgeInsets.only(left: 50),
                       child: Row(
                         children: [
-                          const Text("Don't Have an account?",
+                           Text("Don't Have an account?",
                               style: TextStyle(
                                   fontSize: 20, color: Colors.white)),
                           TextButton(
@@ -142,14 +133,14 @@ class _LoginscreenState extends State<Loginscreen> {
                                     builder: (context) => Screen1(name: "hashem",age:"20" ,position: "CM",proOrNo: "PRO",rate: "8.7",)),
                               );
                             },
-                            child: const Text("Sign up",
+                            child:  Text("Sign up",
                                 style: TextStyle(
                                     color: Colors.orange, fontSize: 20)),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 180),
+                     SizedBox(height: 180),
                   ],
                 ),
               ),

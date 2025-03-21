@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_med_p/HomeScreen/HomeScreen.dart';
 
+import '../BottomNavigetionBar/BottomNavigetionBar.dart';
 import '../SignUp_LogIn/Login.dart';
 
 class UserInfo extends StatefulWidget {
@@ -77,13 +78,7 @@ class _UserInfoState extends State<UserInfo> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Homescreen(
-                            name: name,
-                            age: age,
-                            position: position,
-                            rate: rate,
-                            proOrNo: proOrNo,
-                          ),
+                          builder: (context) =>SnakeNavigationBarExampleScreen()
                         ),
                       );
                     }
