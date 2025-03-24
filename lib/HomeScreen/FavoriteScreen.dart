@@ -1,30 +1,67 @@
 import 'package:flutter/material.dart';
 
-class Favoritescreen extends StatefulWidget {
-  const Favoritescreen({super.key});
+import '../Customizedwidget/HomeContainer.dart';
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key});
 
   @override
-  State<Favoritescreen> createState() => _FavoritescreenState();
+  State<FavoriteScreen> createState() => _FavoriteScreenState();
 }
 
-class _FavoritescreenState extends State<Favoritescreen> {
+class _FavoriteScreenState extends State<FavoriteScreen> {
+  List<Map<String, dynamic>> favoriteContainer = [];
+
+  void toggleFavorite(bool isFavorite, String networkImage, String text, Widget targetScreen) {
+    setState(() {
+      if (isFavorite) {
+        favoriteContainer.add({
+          "networkImage": networkImage,
+          "text": text,
+          "targetScreen": targetScreen,
+        });
+      } else {
+        favoriteContainer.removeWhere((element) => element["text"] == text);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFF030E2F),
-      body: SafeArea(child: Container(width: double.infinity,height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(height: 10,),
-            Text("Favorite",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white), ),
-
-
-
-          ],
-        ),
-      )
+    return Container(
+      decoration: BoxDecoration(
+        color: Color(0xFF030E2F),
+        borderRadius: BorderRadius.circular(0),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(height: 10),
+          Text(
+            "Home",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white),
+          ),
+          Expanded(
+            flex: 5,
+            child: ListView.builder(
+              itemCount: favoriteContainer.length,
+              itemBuilder: (context, index) {
+                return HomeContainer(
+                  networkImage: favoriteContainer[index]["networkImage"]!,
+                  text: favoriteContainer[index]["text"]!,
+                  targetScreen: favoriteContainer[index]["targetScreen"]!,
+                  onFavoriteChanged: (isFav) => toggleFavorite(
+                    isFav,
+                    favoriteContainer[index]["networkImage"]!,
+                    favoriteContainer[index]["text"]!,
+                    favoriteContainer[index]["targetScreen"]!,
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+

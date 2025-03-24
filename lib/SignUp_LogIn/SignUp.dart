@@ -3,26 +3,13 @@ import '../Customizedwidget/logintxtform.dart';
 import '../Data/DataCollect.dart';
 import '../HomeScreen/HomeScreen.dart';
 
-class Screen1 extends StatefulWidget {
-  final String name;
-  final String age;
-  final String position;
-  final String rate;
-  final String proOrNo;
+class SignUp extends StatefulWidget {
 
-  const Screen1({
-    super.key,
-    required this.name,
-    required this.age,
-    required this.position,
-    required this.rate,
-    required this.proOrNo,
-  });
   @override
-  State<Screen1> createState() => _Screen1State();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _Screen1State extends State<Screen1> {
+class _SignUpState extends State<SignUp> {
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -118,7 +105,7 @@ class _Screen1State extends State<Screen1> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => UserInfo()),
+                                builder: (context) => UserInfo(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo")),
                           );
                         }
                       },

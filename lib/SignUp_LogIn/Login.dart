@@ -108,7 +108,7 @@ class _LoginscreenState extends State<Loginscreen> {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => UserInfo()),
+                                builder: (context) => UserInfo(name: widget.name,proOrNo: widget.proOrNo,rate: widget.rate,position: widget.position,age: widget.age,)),
                           );
                         }
                       },
@@ -130,7 +130,7 @@ class _LoginscreenState extends State<Loginscreen> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => Screen1(name: "hashem",age:"20" ,position: "CM",proOrNo: "PRO",rate: "8.7",)),
+                                    builder: (context) => SignUp()),
                               );
                             },
                             child:  Text("Sign up",

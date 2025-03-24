@@ -6,7 +6,7 @@ import 'BoardingScreen2.dart';
 import 'BoardingScreen3.dart';
 
 class Onborardainscreen extends StatefulWidget {
-  const Onborardainscreen({super.key});
+
 
   @override
   State<Onborardainscreen> createState() => _OnborardainscreenState();

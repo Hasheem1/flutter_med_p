@@ -7,8 +7,6 @@ import '../Admin/AdminPassword.dart';
 import '../Admin/AdminProparties.dart';
 
 class Enterstate extends StatefulWidget {
-  const Enterstate({super.key});
-
   @override
   State<Enterstate> createState() => _EnterstateState();
 }
@@ -42,7 +40,7 @@ class _EnterstateState extends State<Enterstate> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"), // Replace with your actual screen
+                                  builder: (context) => Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"),
                                 ),
                               );
                             },
@@ -60,7 +58,7 @@ class _EnterstateState extends State<Enterstate> {
                       child: Column(mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(child: Lottie.network("https://lottie.host/1252baef-ea8f-4354-8b80-002c36d5e7b7/C1yjarOFhw.json",height: 220,width: 500)
-                          ,onTap:() {Navigator.push(context, MaterialPageRoute(builder: (context)=>Screen1(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"),
+                          ,onTap:() {Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp(),
                             ),
                             );
                             },

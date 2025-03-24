@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_med_p/Customizedwidget/UsersData.dart';
 import 'package:flutter_med_p/HomeScreen/HomeScreen.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import '../Customizedwidget/HomeContainer.dart';
 import '../Data/displayData.dart';
 import '../HomeScreen/FavoriteScreen.dart';
 import '../SignUp_LogIn/enterState.dart';
 
 class SnakeNavigationBarExampleScreen extends StatefulWidget {
-  const SnakeNavigationBarExampleScreen({Key? key}) : super(key: key);
-
   @override
   _SnakeNavigationBarExampleScreenState createState() =>
       _SnakeNavigationBarExampleScreenState();
@@ -42,8 +41,8 @@ class _SnakeNavigationBarExampleScreenState
         },
         children: [
           DisplayData(Data("name", "age", "playerPosition", "playerRate", "inTeam")),
-          Homescreen(name: "name", age: "age", position: 'position', rate: 'rate', proOrNo: 'proOrNo'),
-          Favoritescreen(),
+          Homescreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"),
+          FavoriteScreen(),
           Enterstate()
         ],
       ),

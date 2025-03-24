@@ -5,7 +5,20 @@ import '../BottomNavigetionBar/BottomNavigetionBar.dart';
 import '../SignUp_LogIn/Login.dart';
 
 class UserInfo extends StatefulWidget {
-  const UserInfo({super.key});
+  final String name;
+  final String age;
+  final String position;
+  final String rate;
+  final String proOrNo;
+  const UserInfo({
+    super.key,
+    required this.name,
+    required this.age,
+    required this.position,
+    required this.rate,
+    required this.proOrNo,
+  });
+
 
   @override
   State<UserInfo> createState() => _UserInfoState();
