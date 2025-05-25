@@ -34,7 +34,7 @@ class _BordingScreen2State extends State<BordingScreen2> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 100, right: 100),
+              padding: const EdgeInsets.only(top: 20, right: 100),
               child: Center(
                 child: Container(
                   width: 340,

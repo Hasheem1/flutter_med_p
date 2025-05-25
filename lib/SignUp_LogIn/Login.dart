@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../BottomNavigetionBar/bottomTest.dart';
 import '../Customizedwidget/logintxtform.dart';
-import '../Data/DataCollect.dart';
+import '../Data/DataCollect.dart' as data;
 import '../HomeScreen/HomeScreen.dart';
 import 'SignUp.dart';
-
 
 class Loginscreen extends StatefulWidget {
   final String name;
@@ -30,117 +32,132 @@ class _LoginscreenState extends State<Loginscreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isObscured = true;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Login",
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+        ),
+        backgroundColor: Color(0xFF030E2F),
+        iconTheme: IconThemeData(color: Colors.white, size: 30),
+      ),
+      backgroundColor: Colors.black,
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration:  BoxDecoration(color: Color(0xFF030E2F),borderRadius: BorderRadius.circular(0),
-
+        decoration: BoxDecoration(
+          color: Color(0xFF030E2F),
+          borderRadius: BorderRadius.circular(0),
         ),
         child: SafeArea(
           child: Form(
             key: _formKey,
             child: Padding(
-              padding:  EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-
-                     SizedBox(height: 50),
-                     Text("Login",
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                     SizedBox(height: 80),
-                     Padding(
+                    SizedBox(height: 50),
+                    Padding(
                       padding: EdgeInsets.only(right: 180),
-                      child: Text("Let's Get Started",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              color: Colors.white)),
+                      child: Text(
+                        "Let's Get Started",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            color: Colors.white),
+                      ),
                     ),
                     LoginTxtForm(
                       controller: _emailController,
                       hint: "example@domain.com",
                       lbl: "Email or Mobile",
-                      preIcon:  Icon(Icons.email, color: Colors.white),
-
-                      v: (value) {
-                        if (!emailValidation(value!)) {
-                          return "Not valid";
-                        }
-                        return null;
-                      },
+                      preIcon: Icon(Icons.email, color: Colors.white),
                     ),
-                     SizedBox(height: 20),
+                    SizedBox(height: 20),
                     LoginTxtForm(
                       controller: _passwordController,
                       hint: "******",
                       lbl: "Password",
-                      preIcon:  Icon(Icons.lock, color: Colors.white),
-
-                      v: (value) {
-                        if (!passValidation(value!)) {
-                          return "Password is not valid";
-                        }
-                        return null;
-                      },
+                      preIcon: Icon(Icons.lock, color: Colors.white),
                     ),
-                     SizedBox(height: 5),
-                     Padding(
+                    SizedBox(height: 5),
+                    Padding(
                       padding: EdgeInsets.only(left: 250),
-                      child: Text("Forget password?",
-                          style: TextStyle(color: Colors.white)),
+                      child: Text(
+                        "Forget password?",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                     SizedBox(height: 10),
+                    SizedBox(height: 10),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
-                        padding:  EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 170, vertical: 15),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (context) => UserInfo(name: widget.name,proOrNo: widget.proOrNo,rate: widget.rate,position: widget.position,age: widget.age,)),
+                          bool success = await Signin(
+                            _emailController.text,
+                            _passwordController.text,
                           );
+
+                          if (success) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Login successful!"),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+
+                            await Future.delayed(Duration(seconds: 1));
+                            checkUserAndNavigate(context);
+                          }
                         }
                       },
-                      child:  Text("Login",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                     SizedBox(height: 20),
+                    SizedBox(height: 20),
                     Padding(
-                      padding:  EdgeInsets.only(left: 50),
+                      padding: EdgeInsets.only(left: 50),
                       child: Row(
                         children: [
-                           Text("Don't Have an account?",
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.white)),
+                          Text(
+                            "Don't Have an account?",
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp()),
+                                  builder: (context) => SignUp(),
+                                ),
                               );
                             },
-                            child:  Text("Sign up",
-                                style: TextStyle(
-                                    color: Colors.orange, fontSize: 20)),
+                            child: Text(
+                              "Sign up",
+                              style:
+                              TextStyle(color: Colors.orange, fontSize: 20),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                     SizedBox(height: 180),
+                    SizedBox(height: 180),
                   ],
                 ),
               ),
@@ -150,16 +167,58 @@ class _LoginscreenState extends State<Loginscreen> {
       ),
     );
   }
-}
 
-bool emailValidation(String email) {
-  String pattern =
-      r"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$";
-  return RegExp(pattern).hasMatch(email);
-}
+  Future<bool> Signin(String email, String password) async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return true;
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = '';
+      if (e.code == 'user-not-found') {
+        errorMessage = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Wrong password provided.';
+      } else {
+        errorMessage = 'Login failed. Please try again.';
+      }
 
-bool passValidation(String password) {
-  String pattern =
-      r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$';
-  return RegExp(pattern).hasMatch(password);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMessage),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return false;
+    }
+  }
+
+  Future<void> checkUserAndNavigate(BuildContext context) async {
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    final userDoc =
+    await FirebaseFirestore.instance.collection('userCollection').doc(uid).get();
+
+    if (userDoc.exists) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => Bottomtest(),
+        ),
+      );
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => data.UserInfo(
+            name: widget.name,
+            proOrNo: widget.proOrNo,
+            rate: widget.rate,
+            position: widget.position,
+            age: widget.age,
+          ),
+        ),
+      );
+    }
+  }
 }

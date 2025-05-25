@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+// import 'package:lottie/lottie.dart';
 
 class BordingScreen1 extends StatefulWidget {
   const BordingScreen1({super.key});
@@ -36,7 +37,7 @@ class _BordingScreen1State extends State<BordingScreen1> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 100, right: 100),
+                padding: const EdgeInsets.only(top: 20, right: 100),
                 child: Center(
                   child: Container(
                     width: 340,

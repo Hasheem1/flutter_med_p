@@ -1,67 +1,69 @@
 import 'package:flutter/material.dart';
 
-import '../Customizedwidget/HomeContainer.dart';
-class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({super.key});
+class FavoritesPage extends StatelessWidget {
+  final List<Map<String, dynamic>> favorites;
 
-  @override
-  State<FavoriteScreen> createState() => _FavoriteScreenState();
-}
+  FavoritesPage({required this.favorites});
 
-class _FavoriteScreenState extends State<FavoriteScreen> {
-  List<Map<String, dynamic>> favoriteContainer = [];
-
-  void toggleFavorite(bool isFavorite, String networkImage, String text, Widget targetScreen) {
-    setState(() {
-      if (isFavorite) {
-        favoriteContainer.add({
-          "networkImage": networkImage,
-          "text": text,
-          "targetScreen": targetScreen,
-        });
-      } else {
-        favoriteContainer.removeWhere((element) => element["text"] == text);
-      }
-    });
-  }
+  final Color backgroundColor = Color(0xFF030E2F);
+  final Color accentColor = Color(0xFF94e3a8);
+  final Color textColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFF030E2F),
-        borderRadius: BorderRadius.circular(0),
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        elevation: 0,
+        title: Text(
+          'Favorites',
+          style: TextStyle(
+            color: accentColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        centerTitle: true,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(height: 10),
-          Text(
-            "Home",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white),
-          ),
-          Expanded(
-            flex: 5,
-            child: ListView.builder(
-              itemCount: favoriteContainer.length,
-              itemBuilder: (context, index) {
-                return HomeContainer(
-                  networkImage: favoriteContainer[index]["networkImage"]!,
-                  text: favoriteContainer[index]["text"]!,
-                  targetScreen: favoriteContainer[index]["targetScreen"]!,
-                  onFavoriteChanged: (isFav) => toggleFavorite(
-                    isFav,
-                    favoriteContainer[index]["networkImage"]!,
-                    favoriteContainer[index]["text"]!,
-                    favoriteContainer[index]["targetScreen"]!,
-                  ),
-                );
-              },
+      body: favorites.isEmpty
+          ? Center(
+        child: Text(
+          'Your favorites list is empty!',
+          style: TextStyle(color: textColor, fontSize: 18),
+        ),
+      )
+          : ListView.builder(
+        itemCount: favorites.length,
+        padding: EdgeInsets.all(12),
+        itemBuilder: (context, index) {
+          return Card(
+            color: backgroundColor,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(color: accentColor.withOpacity(0.5),width: 3),
             ),
-          ),
-        ],
+            margin: EdgeInsets.symmetric(vertical: 8),
+            child: ListTile(
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: 20, vertical: 12),
+              title: Text(
+                favorites[index]['text'],
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              trailing: Icon(
+                Icons.favorite,
+                color: accentColor,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 }
-

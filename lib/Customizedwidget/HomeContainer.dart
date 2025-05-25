@@ -8,13 +8,16 @@ class HomeContainer extends StatefulWidget {
   final String networkImage;
   final String text;
   final Widget targetScreen;
+  final bool isFavorite;
   final Function(bool) onFavoriteChanged;
 
   HomeContainer({
     required this.networkImage,
     required this.text,
     required this.targetScreen,
+    required this.isFavorite,
     required this.onFavoriteChanged,
+
   });
 
   @override
@@ -23,6 +26,8 @@ class HomeContainer extends StatefulWidget {
 
 class _HomeContainerState extends State<HomeContainer> {
   bool isFavorite = false;
+  bool pressd=false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class _HomeContainerState extends State<HomeContainer> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          border: Border.all(color: Colors.white),
+          border: Border.all(color: Colors.white,width: 2),
         ),
         child: Row(
           children: [
@@ -68,10 +73,9 @@ class _HomeContainerState extends State<HomeContainer> {
                 ),
                 IconButton(
                   onPressed: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
+
                     widget.onFavoriteChanged(isFavorite);
+                    isFavorite=!isFavorite;
                   },
                   icon: Icon(
                     Icons.favorite,

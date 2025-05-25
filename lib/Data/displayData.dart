@@ -1,122 +1,87 @@
 import 'package:flutter/material.dart';
 import '../Customizedwidget/UsersData.dart';
-import '../HomeScreen/HomeScreen.dart';
-import '../SignUp_LogIn/Login.dart';
 
 class DisplayData extends StatefulWidget {
-
-
-
   final Data data;
 
-  const DisplayData(this.data);
+  const DisplayData(this.data, {Key? key}) : super(key: key);
 
   @override
   State<DisplayData> createState() => _DisplayDataState();
 }
 
 class _DisplayDataState extends State<DisplayData> {
+  final Color backgroundColor = Color(0xFF030E2F);
+  final Color accentColor = Color(0xFF94e3a8);
+  final Color textColor = Colors.white;
+
+  Widget buildInfoTile(String label, String value) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        border: Border.all(color: accentColor, width: 3),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              "$label:",
+              style: TextStyle(
+                color: accentColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(
+                color: textColor,
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container(
-      decoration: BoxDecoration(color: Color(0xFF030E2F),
-
-      ),width: double.infinity,height: double.infinity,
-      child: Padding(
-        padding:  EdgeInsets.only(right: 20),
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: SafeArea(
         child: SingleChildScrollView(
+          padding: EdgeInsets.all(24),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  SizedBox(height: 65,),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 8,top: 16,),
-                    child: Container(width:300,decoration: BoxDecoration(color:Colors.orangeAccent,border: Border.all(color: Colors.black,width: 3
-                    ),
-                    ),
-                      child: Center(
-                        child: Text("your information",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
-                        ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 8,top: 50,bottom: 25),
-                    child: Container(width:400,decoration: BoxDecoration(color:Colors.orangeAccent,border: Border.all(color: Colors.black,width: 3
-                    ),
-                    ),
-                      child: Center(
-                        child: Text("Name:${widget.data.name}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
-                        ),
-                        ),
-                      ),
-                    ),
-                  ),
-          
-                  Padding(
-                    padding:  EdgeInsets.only(left: 8,top: 16,bottom: 25),
-                    child: Container(width:400,decoration: BoxDecoration(color:Colors.orangeAccent,border: Border.all(color: Colors.black,width: 3
-                    ),
-                    ),
-                      child: Center(
-                        child: Text("Age:${widget.data.age}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
-                        ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 8,top: 16,bottom: 25),
-                    child: Container(width:400,decoration: BoxDecoration(color:Colors.orangeAccent,border: Border.all(color: Colors.black,width: 3
-                    ),
-                    ),
-                      child: Center(
-                        child: Text("Position:${widget.data.playerPosition}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
-                        ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 8,top: 16,bottom: 25),
-                    child: Container(width:400,decoration: BoxDecoration(color:Colors.orangeAccent,border: Border.all(color: Colors.black,width: 3
-                    ),
-                    ),
-                      child: Center(
-                        child: Text("rating:${widget.data.playerRate}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
-                        ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 8,top: 16,bottom: 25),
-                    child: Container(width:400,decoration: BoxDecoration(color:Colors.orangeAccent,border: Border.all(color: Colors.black,width: 3
-                    ),
-                    ),
-                      child: Center(
-                        child: Text("player status :${widget.data.inTeam}",style: TextStyle(color: Colors.white,backgroundColor: Colors.orangeAccent,fontSize: 30,
-                        ),
-                        ),
-                      ),
-          
-                    ),
-                  ),
-                  SizedBox(height: 30,),
-                ],
+              SizedBox(height: 20),
+              Text(
+                "Your Information",
+                style: TextStyle(
+                  color: accentColor,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                ),
               ),
+              SizedBox(height: 40),
+              buildInfoTile("Name", widget.data.name.toString()),
+              buildInfoTile("Age", widget.data.age.toString()),
+              buildInfoTile("Position", widget.data.playerPosition.toString()),
+              buildInfoTile("Rating", widget.data.playerRate.toString()),
+              buildInfoTile("Player Status", widget.data.inTeam.toString()),
+              SizedBox(height: 30),
             ],
           ),
         ),
       ),
-    ),
-
-
-
-
     );
-
   }
 }

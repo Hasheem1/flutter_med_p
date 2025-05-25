@@ -1,0 +1,2 @@
+C:/Users/hashe/Downloads/flutter_med_p 3/flutter_med_p/android/app/.cxx/RelWithDebInfo/181t5162/x86/CMakeFiles/edit_cache.dir
+C:/Users/hashe/Downloads/flutter_med_p 3/flutter_med_p/android/app/.cxx/RelWithDebInfo/181t5162/x86/CMakeFiles/rebuild_cache.dir

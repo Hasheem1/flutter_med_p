@@ -17,8 +17,10 @@ class _AdminpasswordState extends State<Adminpassword> {
   bool _isObscured = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Color(0xFF030E2F),
-      body: Container(width: double.infinity,height: double.infinity,
+    return Scaffold(appBar: AppBar(title: Text("Admin Password",style: TextStyle(color: Colors.white,fontSize: 30),),iconTheme: IconThemeData(size: 30,color: Colors.white),backgroundColor: Color(0xFF030E2F),),
+      backgroundColor: Color(0xFF030E2F),
+      body: Container(
+        width: double.infinity,height: double.infinity,
 
         child: SingleChildScrollView(
           child: Column(
@@ -26,7 +28,6 @@ class _AdminpasswordState extends State<Adminpassword> {
               SizedBox(height: 15,),
 
 
-              Text(" Admin Password",style: TextStyle(color: Colors.white,fontSize: 30,fontWeight: FontWeight.bold),),
               Lottie.network("https://lottie.host/0ac644af-16af-4293-bf62-0ef3cf048e13/sWEnXywFIi.json"),
 
 

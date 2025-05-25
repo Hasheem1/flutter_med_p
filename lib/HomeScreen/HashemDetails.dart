@@ -2,6 +2,7 @@ import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../Customizedwidget/BookSnackBar.dart';
+import '../Reservations/Reservations.dart';
 
 class HashemDetails extends StatefulWidget {
   const HashemDetails({super.key});
@@ -12,9 +13,9 @@ class HashemDetails extends StatefulWidget {
 
 class _DetailsState extends State<HashemDetails> {
   static const List<String> sampleImages = [
-    "https://scontent.famm11-1.fna.fbcdn.net/v/t1.6435-9/60786026_1235375143297595_8112669266198659072_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=Ant3YrQn8TYQ7kNvgEqupMS&_nc_oc=Adl-kM0QT_2Ha2sLepbQZWv5TlGJ4fq440a-PZkx8BQrnQYsTKIg9nVbHa3Q6uYqqBh9jSMCmTMzwymFzJi6syLt&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=kjwmFg6VB-nUVkkXNEnHbg&oh=00_AYEwfCSulKAkFA3yILuoM1jNVlZYQQVim4kVnz0qkcD_ng&oe=680546AB",
-    "https://scontent.famm11-1.fna.fbcdn.net/v/t1.6435-9/81660755_1433995040102270_3735439332001972224_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=TxRbs0YppFEQ7kNvgGBJHFJ&_nc_oc=AdgytOwwI1eefFv7dBMpEsQYXPb7VmQfa0-qmSJiqVi_X58mw-Axde3bw5oRxvSewgGDEOhF8owTTsY-V1IHMIz2&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=dls0NEqWYXqGWOwVLZITIg&oh=00_AYGydivkDasH7xbsio1CthhTRpPlG07p5GHiejThqMAOHw&oe=67FE7EEC",
-    "https://scontent.famm11-1.fna.fbcdn.net/v/t1.6435-9/94032904_1524340027734437_4014256780518359040_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=_JVYOGs3JioQ7kNvgE3d-A6&_nc_oc=Adi7zljpT6vkDVlba6-fnvGccZDDV1IDyQnclPRsfDcx53rDb5gAq3VaI-0UqPLGnVJbKHSxt4IVa3Z7GFERKx3Q&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=pFFUKAej-JLwOGv1zsKCUg&oh=00_AYGci6Z17sZC_Dmv4-BGvG6223_W5gJKFA-XgVKStZJt7w&oe=67FE8CE6",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwieRKUoLR2301PpPIJcEPquaML3hjIf91cw&s",
+ "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/463899862_2786022721566155_6073433217267447899_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFDhFpiPbPiY2j7FsIUFVnS1bokdnAJL1LVuiR2cAkvUh-YbZlWOb_lvUyKagRIpUC8vs8i5KcHPz3FJ5cacWbV&_nc_ohc=g4f0HR1_x8QQ7kNvwE8H3SU&_nc_oc=AdmwLVKcopGN2DFZeJqOvpBzxuJ6SSF9A4O2PSvW43jwo4RXBwXng8wRsa4LN9DkY-4AluSmf6lxKHUs4bUC9O97&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=hA0xSPunIhi-JynUrct-8Q&oh=00_AfLbG9dULPaZAHXwVJiqV5HRCsGCQjjYirdJeJZ7H21gkA&oe=6838D195",
+    "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/461601294_2764229737078787_987316873294270768_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeFa2nmC7co7don__8Ud5ub9YZdK81_qPXJhl0rzX-o9cuWvuCFvnEuHQq5qlttB9zHuWlz3wrNYHlfLUw1Xc1BQ&_nc_ohc=ZWfrVWvcdQAQ7kNvwGZfm7a&_nc_oc=AdnxFsqR5laf0LcyPbY2Gq9Hd5PVlxNDgIOf4r_WHYwqa2Q2VTJSJVHRVS6bXpkH78RKsLh6JzKhmpTrmllbdLas&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=kwxn7mBjf_51MnuZD2LjSg&oh=00_AfIn7OTI3-BeuW562iQg3GZTYNnxT3U4XRtqAoFjCXzxOg&oe=6838F388",
   ];
 
   @override
@@ -90,8 +91,9 @@ class _DetailsState extends State<HashemDetails> {
                 SizedBox(height: 20,),
                 Center(
                   child: TextButton(onPressed: (){
-                    showSnackBar(context,"Hashem stadium");
-                  }, child: Text("BOOK hashem stadium",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationScreen(),));
+                  },
+                    child: Text("BOOK hashem stadium",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
                   , style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Color(0xFF94e3a8),

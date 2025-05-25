@@ -28,13 +28,13 @@ class _BordingScreen3State extends State<BordingScreen3> {
                 borderRadius: BorderRadius.circular(500),
                 child: Lottie.network(
                   "https://lottie.host/7070df22-c154-4e39-9cf8-6c30642bd80a/tXz1GOPaet.json",
-                  height: 250,
+                  height: 200,
                   width: 500,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 100, right: 100),
+              padding: const EdgeInsets.only(top: 20, right: 100),
               child: Center(
                 child: Container(
 
@@ -64,7 +64,7 @@ class _BordingScreen3State extends State<BordingScreen3> {
                       SizedBox(height: 2,),
                       Text(
                         "this app will facilitate playing this game ",
-                        style: TextStyle(fontSize: 17, color: Colors.white),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       SizedBox(height: 2,),
                       Text(

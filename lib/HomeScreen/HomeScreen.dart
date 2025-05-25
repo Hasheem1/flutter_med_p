@@ -6,19 +6,12 @@ import 'YarmoukDetails.dart';
 import 'toledoDetails.dart';
 
 class Homescreen extends StatefulWidget {
-  final String name;
-  final String age;
-  final String position;
-  final String rate;
-  final String proOrNo;
+  final Function(int) toggleFavorite;
 
-  const Homescreen({
+   Homescreen({
     super.key,
-    required this.name,
-    required this.age,
-    required this.position,
-    required this.rate,
-    required this.proOrNo,
+
+    required this.toggleFavorite
   });
 
   @override
@@ -27,29 +20,31 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   bool FavIconPressed = false;
-  Color IconColor = Colors.white;
-
+  Color color =  Colors.white;
+//FavIconPressed ? Colors.red :
   final List<Map<String, dynamic>> stadiums = [
     {
       "networkImage":
-      "https://scontent.famm11-1.fna.fbcdn.net/v/t1.6435-9/94032904_1524340027734437_4014256780518359040_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=_JVYOGs3JioQ7kNvgE3d-A6&_nc_oc=Adi7zljpT6vkDVlba6-fnvGccZDDV1IDyQnclPRsfDcx53rDb5gAq3VaI-0UqPLGnVJbKHSxt4IVa3Z7GFERKx3Q&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=pFFUKAej-JLwOGv1zsKCUg&oh=00_AYGci6Z17sZC_Dmv4-BGvG6223_W5gJKFA-XgVKStZJt7w&oe=67FE8CE6",
+      "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/294830913_526610772522619_5920334590357221201_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHs3Apcvj-BOtlxRZIPbBA_vE3qtxOg9VK8Teq3E6D1UnHNga8z7rV5VracSDantNaB8t4DFqdvEP4ZqiIzQDQt&_nc_ohc=M3Bx2CpbH_AQ7kNvwHMuQFX&_nc_oc=AdnIscWKGPZrJ4p8z9CxS1St-Y0gPs4HK8i_hjpCV9p-MCEnPpdsAl4Nb2rLsJ5n-tWMvk98nEAx6rfqUoL-6Eif&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=M2PlIl78TOMi5rxuv8PzeQ&oh=00_AfKAeTMWUrNAe21AFD5Qs9q7FvZf05nTbMsDvjHKp5oSbw&oe=6838E554",
       "text": "Hashem Stadium",
       "targetScreen": HashemDetails(),
+      'isFavorite': false
     },
     {
       "networkImage":
-      "https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/458086784_1965552490554654_4256384242845382440_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=iSKl3uYmGP0Q7kNvgFjzbMq&_nc_oc=Adm5QTpEOmX6SX3P4a-aAwBFDysKFpHvyPFA_PwBEW-YQ_D1erOZ8DN8KLxpodMy24PxcvKf2-UvdxiaI5HMEYC0&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=pSmluyzpEvNH4-Jb6SHptA&oh=00_AYF91yARbDGMPN923nyG0rmST4tls64PKcPrJfNyJBuxKw&oe=67E3AA6C",
+      "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/301537330_432735345590382_680355683789910258_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHzTDjL0BHBggMk3fBmXPC1F-KGetbWc0kX4oZ61tZzSVGJxpZCb6AiL-SuYFQMaO9ZDuYwWUL07FdNV--G7I0N&_nc_ohc=iNgJ8gGoZosQ7kNvwHgST04&_nc_oc=AdlYsfCfWRXpFujubJI7jtWTrGr-BDWVIGeF16gmjLG6hjPbUW5m5gWgPq3hl2pBgx8xMbTeVzO8wR3Xx2Eh-0u-&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=HUbTB10dbsnMxvpiklHmPQ&oh=00_AfIAXUMJG7v22yMbpU7vlqmMzqhfXAiFbF03yZ6y861QbA&oe=6838F802",
       "text": "Toledo Stadium",
       "targetScreen": ToledoDetails(),
+      'isFavorite': false
     },
     {
       "networkImage":
-      "https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/464447981_8535832423173037_5287080858927625173_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=uSmXFTzAAN0Q7kNvgF1idRd&_nc_oc=AdnupC4mrUg1s3fK8D8mKx1SxYwAqysyDeyC48UIFCgNs4MuMIJ5Ea61ezepXHSI-BanMfQ5RideYMtL8F2U0hAd&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=TNVLql6HTnbPJoMk7chsMg&oh=00_AYHpDTJn4opOPz2e2jRQ1XZCDh4MMt2LMchpaGXqJEu9Rg&oe=67E37F20",
+      "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/299598202_397098279232913_1864171592706308853_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGlju57SSuObozoFTjauiJy6ar1D9sDZ9XpqvUP2wNn1XTV6ypO6FgOR4EqXjEug9-ZrKPK3eXjV1VjgRn-6D0U&_nc_ohc=roRWLw8pGT4Q7kNvwHTUINo&_nc_oc=Adm3rW5hov1kegj6hVE-8YVSB5Qh5kDk1zODbfIANq53sFdnWZzI-qVmSVJBOQtyR0VjypaBSfGOpyD4_19pRuN5&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=_TBOg2vNHw2dYRNrjNSnkQ&oh=00_AfLgFy40KBpvhJDEGal2C9LbG0YPUhbNzBaTWjYKyzKtkQ&oe=6838C7F4",
       "text": "Yarmouk Stadium",
       "targetScreen": YarmoukDetails(),
+      'isFavorite': false
     },
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,13 +74,11 @@ class _HomescreenState extends State<Homescreen> {
                     networkImage: stadiums[index]["networkImage"],
                     text: stadiums[index]["text"],
                     targetScreen: stadiums[index]["targetScreen"],
+                    isFavorite: FavIconPressed,
                     onFavoriteChanged: (isFav) {
                       setState(() {
-                        if (isFav) {
-                          print("${stadiums[index]['text']} added to favorites!");
-                        } else {
-                          print("${stadiums[index]['text']} removed from favorites!");
-                        }
+                        // toggleFavorite(index);
+                        widget.toggleFavorite(index);
                       });
                     },
                   );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "344858856664",
+    "project_id": "play-football-jo",
+    "storage_bucket": "play-football-jo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344858856664:android:29e3f5d28ee7f251431bad",
+        "android_client_info": {
+          "package_name": "com.example.flutter_med_p"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9Z4_uzzfH4ysRgMFdj3GyEjgMOjDPL5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

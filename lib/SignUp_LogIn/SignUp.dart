@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lottie/lottie.dart';
 import '../Customizedwidget/logintxtform.dart';
 import '../Data/DataCollect.dart';
 import '../HomeScreen/HomeScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+
+import 'Login.dart';
 
 class SignUp extends StatefulWidget {
 
@@ -18,9 +23,12 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(title: Text(
+      "Sign Up  ",
+      style: TextStyle(color: Colors.orange, fontSize: 40),
+    ),backgroundColor: Color(0xFF030E2F),iconTheme: IconThemeData( color: Colors.white,size: 30),),
       body: Container(
-        decoration: BoxDecoration(            color: Color(0xFF030E2F),
+        decoration: BoxDecoration(color: Color(0xFF030E2F),
         ),
         child: Center(
           child: Form(
@@ -32,11 +40,6 @@ class _SignUpState extends State<SignUp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: 0),
-                    Text(
-                      "Sign Up  ",
-                      style: TextStyle(color: Colors.orange, fontSize: 40),
-                    ),
-                    SizedBox(height: 30),
                     LoginTxtForm(
                       controller: _emailController,
                       hint: "example@domain.com",
@@ -45,12 +48,7 @@ class _SignUpState extends State<SignUp> {
                         Icons.email,
                         color: Colors.white,
                       ),
-                      v: (value) {
-                        if (!emailValidation(value!)) {
-                          return "Not valid";
-                        }
-                        return null;
-                      },
+
                     ),
                     SizedBox(height: 30),
                     LoginTxtForm(
@@ -58,12 +56,6 @@ class _SignUpState extends State<SignUp> {
                       hint: "******",
                       lbl: "Password",
 
-                      v: (value) {
-                        if (!passValidation(value!)) {
-                          return "Password must contain at least 8 characters, including a number, an uppercase letter, and a special character.";
-                        }
-                        return null;
-                      },
                       preIcon: Icon(
                         Icons.lock,
                         color: Colors.white,
@@ -75,17 +67,7 @@ class _SignUpState extends State<SignUp> {
                       hint: "******",
                       lbl: "Confirm Password",
 
-                      v: (value) {
-                        if (!passValidation(value!)) {
-                          return "Password must contain at least 8 characters, including a number, an uppercase letter, and a special character.";
-                        }
-                        if (_confirmPasswordController.text != _passwordController.text) {
 
-                          return "Passwords do not match.";
-
-                        }
-                        return null;
-                      },
                       preIcon: Icon(
                         Icons.lock,
                         color: Colors.white,
@@ -100,15 +82,20 @@ class _SignUpState extends State<SignUp> {
                             left: 50, right: 50, top: 15, bottom: 15),
                       ),
                       onPressed: () {
-                        print("${_passwordController.text}");
-                        print("${_confirmPasswordController.text}");
                         if (_formKey.currentState!.validate()) {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (context) => UserInfo(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo")),
-                          );
+                          if (_passwordController.text != _confirmPasswordController.text) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Passwords do not match.'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                            return;
+                          }
+                          SignUp(_emailController.text, _passwordController.text);
                         }
                       },
+
                       child: Text(
                         "Sign Up",
                         style: TextStyle(
@@ -118,6 +105,38 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     SizedBox(height: 50),
+
+                    Column(
+                      children: [
+                        Row(mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+
+                            Text("already hava an account ?",style: TextStyle(fontSize: 15,color: Colors.white),),
+
+                            TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"),));                        },
+                                          child: Text("Sign in",style: TextStyle(color:Colors.orange,fontWeight: FontWeight.bold ),))
+                          ],
+                        ),
+                        Row(mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(30)),
+                              child: InkWell(onTap: (){
+                                signInWithGoogle();
+                              },
+                                child: Lottie.network(
+                                  "https://lottie.host/bb66f443-8c55-4889-adc3-c3d00eaebbce/hsnUu0MW4U.json",
+                                  height: 50,
+                                  width: 50,
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        )
+                      ],
+                    )
+
                   ],
                 ),
               ),
@@ -127,16 +146,66 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
+  Future SignUp(String email, String pass) async {
+    try {
+      final credential = await auth.FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: email,
+        password: pass,
+      );
+
+      // Navigate to HomeScreen after successful signup
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo")));
+
+    } on auth.FirebaseAuthException catch (e) {
+      String errorMsg = '';
+      if (e.code == 'weak-password') {
+        errorMsg = 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        errorMsg = 'The account already exists for that email.';
+      } else if (e.code == 'invalid-email') {
+        errorMsg = 'The email address is not valid.';
+      } else {
+        errorMsg = 'Something went wrong. Please try again.';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMsg),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An unexpected error occurred.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      print(e);
+    }
+  }
+  Future<auth.UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = auth.GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await auth.FirebaseAuth.instance.signInWithCredential(credential);
+
+
+  }
+
+
 }
 
-bool emailValidation(String email) {
-  String pattern =
-      r"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$";
-  return RegExp(pattern).hasMatch(email);
-}
-
-bool passValidation(String password) {
-  String pattern =
-      r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$';
-  return RegExp(pattern).hasMatch(password);
-}

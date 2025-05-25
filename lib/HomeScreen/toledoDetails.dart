@@ -2,6 +2,7 @@ import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../Customizedwidget/BookSnackBar.dart';
+import '../Reservations/Reservations.dart';
 
 class ToledoDetails extends StatefulWidget {
   const ToledoDetails({super.key});
@@ -12,8 +13,8 @@ class ToledoDetails extends StatefulWidget {
 
 class _DetailsState extends State<ToledoDetails> {
   static const List<String> sampleImages = [
-"https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/458086784_1965552490554654_4256384242845382440_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=iSKl3uYmGP0Q7kNvgFjzbMq&_nc_oc=Adm5QTpEOmX6SX3P4a-aAwBFDysKFpHvyPFA_PwBEW-YQ_D1erOZ8DN8KLxpodMy24PxcvKf2-UvdxiaI5HMEYC0&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=pSmluyzpEvNH4-Jb6SHptA&oh=00_AYF91yARbDGMPN923nyG0rmST4tls64PKcPrJfNyJBuxKw&oe=67E3AA6C",
-"https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/467766360_572949832048289_1813252537619372338_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=5YV4Kf39EToQ7kNvgH7i00E&_nc_oc=AdmghFe-Fs8AEOhoLenfdPeKaEsOM3AKyEZDJ1dZgfITn5To7k8xogl1TUpxY2VsWDw7469XxQK9bnaTu2STSnjl&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=TBhELqSrAsnW9cGG9kzgqw&oh=00_AYGOTXgmMnRAEL7CNsVLlwj1qokVv1atk-okfwZoO8yfsQ&oe=67E39DE8",
+"https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/490061467_2137491190027449_2294138513476869834_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeFJT9q7Z6Ozbxp9G4-BXCjDB6R9JrG_yJ0HpH0msb_InbkZBC67SLizmUKQ_G-PYvbkgSbHTuivlHXs3VCVNJ52&_nc_ohc=u27vQYaBpkcQ7kNvwH5djCB&_nc_oc=AdklTQtjWqXrHeTqTSfQ3sOl5ZT2ZGx0Vs-Kup1D5Vr03zzgevdehMwVm-m6Mn4mJrAgzNaJkSHZfgPAjRNLL1XD&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=W0ZkxMSKJCn1egnjIq9NHg&oh=00_AfJfYch456GKHDVSQutK36O71vE3VXgC6XGheHGejb5Tug&oe=6838EAD6",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk1hBkeQPsPqhZ2otlJVjC2kS8PQYQD0PQTw&s",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqRwNEsvG5JolF16IXWS7IAsZg54XVapgq4A&s"
   ];
 
@@ -89,7 +90,7 @@ class _DetailsState extends State<ToledoDetails> {
                 SizedBox(height: 20,),
                 Center(
                   child: TextButton(onPressed: (){
-                    showSnackBar(context,"Toledo stadium");
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationScreen(),));
                   }, child: Text("BOOK Toledo stadium",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
                     , style: TextButton.styleFrom(
                         foregroundColor: Colors.white,

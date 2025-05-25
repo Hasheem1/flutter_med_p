@@ -5,6 +5,7 @@ class Data{
   String? playerPosition;
   String? playerRate;
   String? inTeam;
-Data(this.name,this.age,this.playerPosition,this.playerRate,this.inTeam);
+Data(
+      {required this.name,required this.age,required this.playerPosition,required this.playerRate,required this.inTeam});
 
 }

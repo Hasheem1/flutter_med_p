@@ -1,8 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_med_p/BottomNavigetionBar/bottomTest.dart';
+import 'package:flutter_med_p/Customizedwidget/UsersData.dart';
 import 'package:flutter_med_p/HomeScreen/HomeScreen.dart';
-
 import '../BottomNavigetionBar/BottomNavigetionBar.dart';
+import '../BottomNavigetionBar/gitInfoFromFire.dart';
 import '../SignUp_LogIn/Login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../Tests/test1.dart';
 
 class UserInfo extends StatefulWidget {
   final String name;
@@ -77,6 +84,8 @@ class _UserInfoState extends State<UserInfo> {
                 SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: () {
+                    print("ffffffffff");
+
                     String name = _controller1.text;
                     String age = _controller2.text;
                     String position = _controller3.text;
@@ -88,12 +97,9 @@ class _UserInfoState extends State<UserInfo> {
                         position.isNotEmpty &&
                         rate.isNotEmpty &&
                         proOrNo.isNotEmpty) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>SnakeNavigationBarExampleScreen()
-                        ),
-                      );
+                      addUser(name, age, position, rate, proOrNo);
+Navigator.push(context, MaterialPageRoute(builder: (context) => Bottomtest(),));
+
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -135,4 +141,20 @@ class _UserInfoState extends State<UserInfo> {
       ),
     );
   }
+
+
+  addUser(String name, String age, String position, String rate, String state) {
+    FirebaseFirestore userInstance = FirebaseFirestore.instance;
+    CollectionReference users = userInstance.collection('userCollection');
+    users.doc(FirebaseAuth.instance.currentUser!.uid).set(
+        {
+          'name': name,
+          'age': age,
+          'position': position,
+          'Rate': rate,
+          'State': state,
+        }
+    );
+  }
+
 }

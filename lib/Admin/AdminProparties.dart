@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+
+import 'DataDelete.dart';
+import 'DataStore.dart';
 class Adminproparties extends StatefulWidget {
   const Adminproparties({super.key});
 
@@ -21,13 +24,19 @@ class _AdminpropartiesState extends State<Adminproparties> {
               SizedBox(height: 1,),
               // Text("Admin Properties ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),),
               SizedBox(height: 20,),
-              Lottie.network("https://lottie.host/7e6e9070-23e8-4cad-8320-5d249f352822/tMPWG9rUnK.json",width: 200,height: 200),
+              GestureDetector(
+               child: Lottie.network("https://lottie.host/7e6e9070-23e8-4cad-8320-5d249f352822/tMPWG9rUnK.json",width: 200,height: 200)
+              ,onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddStadiumScreen(),));
+              },),
               Text("add stadiums",style: TextStyle(color: Colors.white,fontSize: 18,),),
               SizedBox(height: 20,),
               Container(decoration: BoxDecoration(),
                   child: Lottie.network("https://lottie.host/2e69dc22-2905-49cc-aca7-86c5562b4f1f/uehy5N8sae.json",width: 200,height: 200)),
               Text("modify stadiums",style: TextStyle(color: Colors.white,fontSize: 18),),
-              Lottie.network("https://lottie.host/31922e66-6ee7-4ae4-907a-f64798acbd16/ajqegm2QOo.json",width: 200,height: 200),
+              GestureDetector(child: Lottie.network("https://lottie.host/31922e66-6ee7-4ae4-907a-f64798acbd16/ajqegm2QOo.json",width: 200,height: 200)
+              ,onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => Placeholder(),));
+                } ,),
               Text("delete stadiums",style: TextStyle(color: Colors.white,fontSize: 18),),
               SizedBox(height: 20,),
 
