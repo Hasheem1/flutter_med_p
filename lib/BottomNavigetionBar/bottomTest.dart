@@ -12,8 +12,6 @@ import '../SignUp_LogIn/enterState.dart';
 import '../Tests/test1.dart';
 import '../settings/settings.dart';
 class Bottomtest extends StatefulWidget {
- // Data data;
-  // Bottomtest({required this.data});
   @override
   State<Bottomtest> createState() => _BottomtestState();
 }
@@ -62,14 +60,7 @@ class _BottomtestState extends State<Bottomtest> {
 
   List<Widget> _buildPages() {
     return [
-      // DisplayData(Data(
-      //     name: widget.data.name,
-      //     age: widget.data.age,
-      //     playerPosition: widget.data.playerPosition,
-      //     playerRate: widget.data.playerRate,
-      //     inTeam: widget.data.inTeam
-      // )
-      // ),
+
       displayData(),
       Homescreen(toggleFavorite: toggleFavorite),
       FavoritesPage(favorites: favoriteStadiums),
@@ -81,7 +72,7 @@ class _BottomtestState extends State<Bottomtest> {
   @override
   Widget build(BuildContext context) {
     if (_isLoggedOut) {
-      return Enterstate(); // Replace entire screen when logged out
+      return Enterstate();
     }
 
     return Scaffold(
@@ -112,7 +103,7 @@ class _BottomtestState extends State<Bottomtest> {
           BottomNavigationBarItem(
             backgroundColor: Color(0xFF030E2F),
             icon: Icon(Icons.info),
-            label: 'info',
+            label: 'information',
           ),
           BottomNavigationBarItem(
             backgroundColor: Color(0xFF030E2F),
@@ -122,13 +113,13 @@ class _BottomtestState extends State<Bottomtest> {
           BottomNavigationBarItem(
             backgroundColor: Color(0xFF030E2F),
             icon: Icon(Icons.favorite),
-            label: 'fav',
+            label: 'favorite',
           ),
 
           BottomNavigationBarItem(
             backgroundColor: Color(0xFF030E2F),
             icon: Icon(Icons.settings),
-            label: 'log',
+            label: 'Settings',
           ),
         ],
       ),
