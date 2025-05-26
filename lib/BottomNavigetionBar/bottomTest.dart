@@ -70,7 +70,7 @@ class _BottomtestState extends State<Bottomtest> {
       //     inTeam: widget.data.inTeam
       // )
       // ),
-      Test1(),
+      displayData(),
       Homescreen(toggleFavorite: toggleFavorite),
       FavoritesPage(favorites: favoriteStadiums),
       Settings()
