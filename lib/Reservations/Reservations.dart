@@ -54,6 +54,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
     return Scaffold(
       backgroundColor: Color(0xFF030E2F),
       appBar: AppBar(
+
         backgroundColor: Color(0xFF030E2F),
         iconTheme: IconThemeData(color: Colors.white, size: 30),
         title: Text(

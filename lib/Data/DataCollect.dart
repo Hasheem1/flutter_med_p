@@ -98,7 +98,7 @@ class _UserInfoState extends State<UserInfo> {
                         rate.isNotEmpty &&
                         proOrNo.isNotEmpty) {
                       addUser(name, age, position, rate, proOrNo);
-Navigator.push(context, MaterialPageRoute(builder: (context) => Bottomtest(),));
+Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Bottomtest(),));
 
                     }
                   },
