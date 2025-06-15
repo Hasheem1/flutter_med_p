@@ -18,7 +18,7 @@ class _AddStadiumScreenState extends State<AddStadiumScreen> {
       stadiums.add({
         "networkImage": _imageController.text,
         "text": _nameController.text,
-        "targetScreen": Placeholder(), // Replace with actual screen
+        "targetScreen": Placeholder(),
         "isFavorite": false,
       });
     });

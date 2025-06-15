@@ -1,10 +1,11 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class GetUserName extends StatelessWidget {
   final String documentId;
 
-  GetUserName(this.documentId);
+  GetUserName(this.documentId, {super.key});
 
   final Color backgroundColor = const Color(0xFF030E2F);
   final Color accentColor = const Color(0xFF94e3a8);
@@ -39,7 +40,7 @@ class GetUserName extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 0),
                     Text(
                       "Your Information",
                       style: TextStyle(
@@ -50,12 +51,11 @@ class GetUserName extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    buildInfoTile("Name", data['name']),
-                    buildInfoTile("Age", data['age'].toString()),
-                    buildInfoTile("Position", data['position']),
-                    buildInfoTile("Rate", data['Rate'].toString()),
-                    buildInfoTile("State", data['State'].toString()),
-
+                    buildInfoTile(context, "name", data['name']),
+                    buildInfoTile(context, "age", data['age'].toString()),
+                    buildInfoTile(context, "position", data['position']),
+                    buildInfoTile(context, "Rate", data['Rate'].toString()),
+                    buildInfoTile(context, "State", data['State'].toString()),
                   ],
                 ),
               ),
@@ -68,7 +68,7 @@ class GetUserName extends StatelessWidget {
     );
   }
 
-  Widget buildInfoTile(String label, String value) {
+  Widget buildInfoTile(BuildContext context, String label, String value) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -80,6 +80,7 @@ class GetUserName extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
+            flex: 2,
             child: Text(
               "$label:",
               style: TextStyle(
@@ -90,6 +91,7 @@ class GetUserName extends StatelessWidget {
             ),
           ),
           Expanded(
+            flex: 3,
             child: Text(
               value,
               style: TextStyle(
@@ -99,8 +101,61 @@ class GetUserName extends StatelessWidget {
               textAlign: TextAlign.right,
             ),
           ),
+          Expanded(
+            flex: 1,
+            child: IconButton(
+              onPressed: () {
+                showEditDialog(context, label, value);
+              },
+              icon: Icon(Icons.mode, color: accentColor),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  void showEditDialog(BuildContext context, String field, String oldValue) {
+    final TextEditingController controller = TextEditingController(text: oldValue);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Update $field"),
+        content: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            labelText: "Enter new $field",
+            border: const OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              String newValue = controller.text.trim();
+              if (newValue.isNotEmpty) {
+                await FirebaseFirestore.instance
+                    .collection('userCollection')
+                    .doc(documentId)
+                    .update({field: _castValue(field, newValue)});
+                Navigator.pop(context);
+              }
+            },
+            child: const Text("Update"),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  dynamic _castValue(String field, String value) {
+    if (field.toLowerCase() == "age" || field.toLowerCase() == "rate") {
+      return int.tryParse(value) ?? value;
+    }
+    return value;
   }
 }

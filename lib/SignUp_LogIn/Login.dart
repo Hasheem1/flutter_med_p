@@ -119,7 +119,7 @@ class _LoginscreenState extends State<Loginscreen> {
                             );
 
                             await Future.delayed(Duration(seconds: 1));
-                            checkUserAndNavigate(context);
+                            checkUserAndNavigate(context, _emailController.text.trim());
                           }
                         }
                       },
@@ -195,28 +195,41 @@ class _LoginscreenState extends State<Loginscreen> {
     }
   }
 
-  Future<void> checkUserAndNavigate(BuildContext context) async {
-    final String uid = FirebaseAuth.instance.currentUser!.uid;
+  Future<void> checkUserAndNavigate(BuildContext context, String email) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('userCollection')
+          .where('email', isEqualTo: email)
+          .limit(1)
+          .get();
 
-    final userDoc =
-    await FirebaseFirestore.instance.collection('userCollection').doc(uid).get();
-
-    if (userDoc.exists) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => Bottomtest(),
-        ),
-      );
-    } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => data.UserInfo(
-            name: widget.name,
-            proOrNo: widget.proOrNo,
-            rate: widget.rate,
-            position: widget.position,
-            age: widget.age,
+      if (querySnapshot.docs.isNotEmpty) {
+        print("Email exists in userCollection");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => Bottomtest(),
           ),
+        );
+      } else {
+        print("Email not found, go to data collection");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => data.UserInfo(
+              name: widget.name,
+              proOrNo: widget.proOrNo,
+              rate: widget.rate,
+              position: widget.position,
+              age: widget.age,
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      print("Error checking user existence: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error checking user data.'),
+          backgroundColor: Colors.red,
         ),
       );
     }

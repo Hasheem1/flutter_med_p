@@ -103,13 +103,13 @@ class _displayDataState extends State<displayData> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Column(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 
-                  SizedBox(height: 20,),
-                  GetUserName(FirebaseAuth.instance.currentUser!.uid)
+                  SizedBox(height: 0,),
+                  GetUserName(FirebaseAuth.instance.currentUser!.email.toString())
 
                 ],
               ),

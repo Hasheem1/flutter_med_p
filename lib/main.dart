@@ -62,12 +62,9 @@ class _MyappState extends State<Myapp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-     // home: Splashscreen(),
- //home: Settings(),
- // home:DisplayData(Data(name: "name", age: "age", playerPosition: "playerPosition", playerRate: "playerRate", inTeam: "inTeam"))
-  //  home: Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"),
       home: FirebaseAuth.instance.currentUser==null?Splashscreen() :Bottomtest(),
 
     );
   }
 }
+                                       

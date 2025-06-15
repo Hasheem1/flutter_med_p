@@ -143,18 +143,29 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Bottomtest(),));
   }
 
 
-  addUser(String name, String age, String position, String rate, String state) {
+  addUser( String name, String age, String position, String rate, String state) async {
     FirebaseFirestore userInstance = FirebaseFirestore.instance;
-    CollectionReference users = userInstance.collection('userCollection');
-    users.doc(FirebaseAuth.instance.currentUser!.uid).set(
-        {
-          'name': name,
-          'age': age,
-          'position': position,
-          'Rate': rate,
-          'State': state,
-        }
-    );
+    String? userEmail = FirebaseAuth.instance.currentUser?.email;
+
+    if (userEmail != null) {
+      CollectionReference users = userInstance.collection('userCollection');
+
+      await users.doc(userEmail).set(
+          { 'email':FirebaseAuth.instance.currentUser?.email,
+            'name': name,
+            'age': age,
+            'position': position,
+            'Rate': rate,
+            'State': state,
+
+
+          }
+      );
+
+    } else {
+      print("User email is null.");
+    }
   }
+
 
 }

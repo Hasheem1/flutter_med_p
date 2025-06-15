@@ -114,7 +114,7 @@ class _SignUpState extends State<SignUp> {
                             Text("already hava an account ?",style: TextStyle(fontSize: 15,color: Colors.white),),
 
                             TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"),));                        },
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo"),));                        },
                                           child: Text("Sign in",style: TextStyle(color:Colors.orange,fontWeight: FontWeight.bold ),))
                           ],
                         ),

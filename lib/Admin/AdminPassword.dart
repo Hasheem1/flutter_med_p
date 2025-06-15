@@ -28,7 +28,8 @@ class _AdminpasswordState extends State<Adminpassword> {
               SizedBox(height: 15,),
 
 
-              Lottie.network("https://lottie.host/0ac644af-16af-4293-bf62-0ef3cf048e13/sWEnXywFIi.json"),
+              Lottie.network("https://lottie.host/0ac644af-16af-4293-bf62-0ef3cf048e13/sWEnXywFIi.json"
+              ,width: 300,height: 300),
 
 
               TextFormField(style: TextStyle(color: Colors.white,fontSize: 30),
@@ -52,7 +53,24 @@ class _AdminpasswordState extends State<Adminpassword> {
 
 
               SizedBox(height: 15,),
-              TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => Adminproparties(),));},style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Color(0xFFf4bb8e),
+              TextButton(onPressed: (){
+                if(_passwordController.text=="1234"){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Adminproparties(),));}
+                else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Wrong password, please try again"),
+                      backgroundColor: Colors.red,
+                      behavior: SnackBarBehavior.floating,
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
+                }
+
+              }
+                
+                ,style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Color(0xFFf4bb8e),
+                  
                 )
                 ), child: Padding(
                 padding:  EdgeInsets.all(8.0),

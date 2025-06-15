@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_med_p/SignUp_LogIn/enterState.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -15,46 +15,177 @@ class _SettingsState extends State<Settings> {
   final Color backgroundColor = const Color(0xFF030E2F);
   final Color accentColor = const Color(0xFF94e3a8);
   final Color textColor = Colors.white;
+  static const IconData policy = IconData(0xe4d9, fontFamily: 'MaterialIcons');
+  static const IconData rule_rounded = IconData(0xf011d, fontFamily: 'MaterialIcons');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:backgroundColor,
-      appBar: AppBar(title: Center(child: Text("Settings",style: TextStyle(color: accentColor,fontWeight: FontWeight.bold,fontSize: 30),)
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            "Settings",
+            style: TextStyle(color: accentColor, fontWeight: FontWeight.bold, fontSize: 30),
+          ),
+        ),
+        backgroundColor: backgroundColor,
       ),
-      backgroundColor: backgroundColor,),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SizedBox(height: 40),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text("APP SETTINGS ",
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                  ),
+                  AccountTile(
+                      title: "language",
+                      leadingIcon: Icons.language_sharp,
+                      accentColor: accentColor,
+                      textColor: textColor),
+                  SizedBox(height: 20),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text("SUPPORT",
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                  ),
+                  AccountTile(
+                      title: "FAQ’s",
+                      leadingIcon: Icons.question_mark,
+                      accentColor: accentColor,
+                      textColor: textColor),
+                  SizedBox(height: 20),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text("LEGAL",
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                  ),
+                  AccountTile(
+                      title: "Privacy & Policy ",
+                      leadingIcon: Icons.lock,
+                      accentColor: accentColor,
+                      textColor: textColor),
+                  AccountTile(
+                      title: "Terms & Conditions",
+                      leadingIcon: policy,
+                      accentColor: accentColor,
+                      textColor: textColor),
+                  AccountTile(
+                      title: "Rules Book",
+                      leadingIcon: rule_rounded,
+                      accentColor: accentColor,
+                      textColor: textColor),
+                  SizedBox(height: 20),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text("OUR TEAM",
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                  ),
+                  AccountTile(
+                      title: "Join Us",
+                      leadingIcon: Icons.headphones,
+                      accentColor: accentColor,
+                      textColor: textColor),
+                  SizedBox(height: 20),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text("RESERVATION CANCELLATIONS",
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                  ),
+                  AccountTile(
+                    title: "CANCELLATIONS",
+                    leadingIcon: Icons.delete,
+                    accentColor: accentColor,
+                    textColor: textColor,
+                    onTap: deleteReservation,
+                  ),
+                ],
+              ),
+            ),
 
-body: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-    Column(
-
-      children: [
-        SizedBox(height: 40,),
-        AccountTile(title: "Account", leadingIcon: Icons.account_circle_sharp, accentColor: accentColor, textColor: textColor),
-        AccountTile(title: "Notifications", leadingIcon: Icons.notifications, accentColor: accentColor, textColor: textColor),
-        AccountTile(title: "Privacy & Security ", leadingIcon: Icons.lock, accentColor: accentColor, textColor: textColor),
-        AccountTile(title: "Help and support", leadingIcon: Icons.headphones, accentColor: accentColor, textColor: textColor),
-        AccountTile(title: "About", leadingIcon: Icons.help, accentColor: accentColor, textColor: textColor),
-        AccountTile(title: "Delete Reservation", leadingIcon: Icons.delete, accentColor: accentColor, textColor: textColor,onTap: deleteReservation,)
-
-      ],
-
-    ),
-    Column(mainAxisAlignment: MainAxisAlignment.end,
-
-      children: [
-        InkWell(onTap: () { logout();
 
 
-        },
-            child: Text("Log out", style: TextStyle(color: Colors.red,fontSize: 30),)),
-      ],
-    )
-  ],
-),
+            SizedBox(height: 20),
 
+            // Second social icon row with FontAwesome icons wrapped in horizontal scroll
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
+                      children: [
+                        Icon(FontAwesomeIcons.whatsapp, size: 40, color: Colors.green),
+                        SizedBox(height: 5),
+                        Text('WhatsApp', style: TextStyle(fontSize: 12, color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
+                      children: [
+                        Icon(FontAwesomeIcons.instagram, size: 40, color: Colors.purple),
+                        SizedBox(height: 5),
+                        Text('Instagram', style: TextStyle(fontSize: 12, color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
+                      children: [
+                        Icon(FontAwesomeIcons.tiktok, size: 40, color: Colors.white),
+                        SizedBox(height: 5),
+                        Text('TikTok', style: TextStyle(fontSize: 12, color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
+                      children: [
+                        Icon(FontAwesomeIcons.youtube, size: 40, color: Colors.red),
+                        SizedBox(height: 5),
+                        Text('YouTube', style: TextStyle(fontSize: 12, color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
+            SizedBox(height: 20),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    logout();
+                  },
+                  child: Text(
+                    "Log out",
+                    style: TextStyle(color: Colors.red, fontSize: 25),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
+
   void deleteReservation() {
     showDialog(
       context: context,
@@ -80,12 +211,13 @@ body: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
       },
     );
   }
+
   void logout() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor:Colors.grey,
+          backgroundColor: Colors.grey,
           title: Text("Log out of your account?", style: TextStyle(color: Colors.white)),
           content: Text(
             "Are you sure you want to log out?",
@@ -96,9 +228,12 @@ body: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               onPressed: () {
                 FirebaseAuth.instance.signOut();
 
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Enterstate(),));
-
-
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Enterstate(),
+                  ),
+                );
               },
               child: Text("OK", style: TextStyle(color: Colors.white)),
             ),
@@ -111,8 +246,6 @@ body: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
       },
     );
   }
-
-
 }
 
 class AccountTile extends StatelessWidget {
@@ -144,9 +277,9 @@ class AccountTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(leadingIcon, size: 30, color: accentColor),
+                    Icon(leadingIcon, size: 25, color: accentColor),
                     const SizedBox(width: 8),
-                    Text(title, style: TextStyle(fontSize: 30, color: textColor)),
+                    Text(title, style: TextStyle(fontSize: 25, color: textColor)),
                   ],
                 ),
                 Icon(Icons.arrow_forward_ios, size: 30, color: accentColor),
@@ -156,9 +289,5 @@ class AccountTile extends StatelessWidget {
         ],
       ),
     );
-
   }
-
-
-
 }
