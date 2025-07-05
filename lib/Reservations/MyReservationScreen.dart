@@ -17,7 +17,6 @@ class ReservationBooked extends StatelessWidget {
 
       final snapshot = await reservationCollection.get();
 
-      // Extract all reservation details
       List<Map<String, dynamic>> reservations = snapshot.docs
           .map((doc) => doc.data())
           .toList();
@@ -63,7 +62,7 @@ class ReservationBooked extends StatelessWidget {
 
               return Center(
                 child: Card(
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  margin: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
                   color: Color(0xFF94e3a8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -74,27 +73,33 @@ class ReservationBooked extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Reservation Details',
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF030E2F),
+                        Center(
+                          child: Text(
+                            'Reservation ${index + 1}',
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF030E2F),
+                            ),
                           ),
                         ),
                         SizedBox(height: 20),
+                        if (res.containsKey('stadiumId'))
+                          Text('🆔 Stadium: ${res['stadiumId']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                         if (res.containsKey('stadium'))
-                          Text('🏟 Stadium: ${res['stadium']}', style: TextStyle(fontSize: 20, color: Colors.black)),
+                          Text('🏟 Stadium: ${res['stadium']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                         if (res.containsKey('day'))
-                          Text('📅 Day: ${res['day']}', style: TextStyle(fontSize: 20, color: Colors.black)),
+                          Text('📅 Day: ${res['day']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                         if (res.containsKey('state'))
-                          Text('📍 State: ${res['state']}', style: TextStyle(fontSize: 20, color: Colors.black)),
+                          Text('📍 State: ${res['state']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                         if (res.containsKey('time'))
-                          Text('⏰ Time: ${res['time']}', style: TextStyle(fontSize: 20, color: Colors.black)),
+                          Text('⏰ Time: ${res['time']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                         if (res.containsKey('year'))
-                          Text('📆 Year: ${res['year']}', style: TextStyle(fontSize: 20, color: Colors.black)),
+                          Text('📆 Year: ${res['year']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                         if (res.containsKey('price'))
-                          Text('💰 Price: ${res['price']}', style: TextStyle(fontSize: 20, color: Colors.black)),
+                          Text('💰 Price: ${res['price']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
+                        if (res.containsKey('players counter'))
+                          Text('👥 Players number: ${res['players counter']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),

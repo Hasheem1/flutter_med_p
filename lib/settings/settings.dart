@@ -2,7 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_med_p/SignUp_LogIn/enterState.dart';
+import 'package:flutter_med_p/settings/support/Faq%20S.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'Legal/Rules Book.dart';
+import 'Legal/Terms&conditions.dart';
+import 'Legal/privacy&policy.dart';
+import 'our team/Join us.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -56,11 +62,18 @@ class _SettingsState extends State<Settings> {
                     child: Text("SUPPORT",
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
                   ),
-                  AccountTile(
-                      title: "FAQ’s",
-                      leadingIcon: Icons.question_mark,
-                      accentColor: accentColor,
-                      textColor: textColor),
+                  InkWell(
+                    child: AccountTile( 
+                        title: "FAQ’s",
+                        leadingIcon: Icons.question_mark,
+                        accentColor: accentColor,
+                         textColor: textColor,
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>FAQScreen()));
+                    },),
+
+                  ),
+                  
+                  
                   SizedBox(height: 20),
                   Container(
                     alignment: Alignment.topLeft,
@@ -71,17 +84,35 @@ class _SettingsState extends State<Settings> {
                       title: "Privacy & Policy ",
                       leadingIcon: Icons.lock,
                       accentColor: accentColor,
-                      textColor: textColor),
+                      textColor: textColor,
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PrivacyPolicyScreen()),
+                    );
+
+                  },),
+
                   AccountTile(
                       title: "Terms & Conditions",
                       leadingIcon: policy,
                       accentColor: accentColor,
-                      textColor: textColor),
+                      textColor: textColor,
+                  onTap: (){Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TermsAndConditionsScreen()),
+                  );
+                  },),
                   AccountTile(
                       title: "Rules Book",
                       leadingIcon: rule_rounded,
                       accentColor: accentColor,
-                      textColor: textColor),
+                      textColor: textColor,
+                  onTap: (){Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RulesBookScreen()),
+                  );
+                  },),
                   SizedBox(height: 20),
                   Container(
                     alignment: Alignment.topLeft,
@@ -92,7 +123,14 @@ class _SettingsState extends State<Settings> {
                       title: "Join Us",
                       leadingIcon: Icons.headphones,
                       accentColor: accentColor,
-                      textColor: textColor),
+                      textColor: textColor,
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => JoinUsScreen()),
+                    );
+
+                  },),
                   SizedBox(height: 20),
                   Container(
                     alignment: Alignment.topLeft,

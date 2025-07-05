@@ -46,7 +46,7 @@ class _HomeContainerState extends State<HomeContainer> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 image: DecorationImage(
-                  image: NetworkImage(widget.networkImage),
+                  image: AssetImage(widget.networkImage),
                   fit: BoxFit.cover,
                 ),
               ),

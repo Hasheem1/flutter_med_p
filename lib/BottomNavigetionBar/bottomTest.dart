@@ -100,7 +100,9 @@ class _BottomtestState extends State<Bottomtest> {
     }
 
     if (_isLoadingUser) {
-      return Scaffold(
+      return Scaffold(appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
         backgroundColor: Color(0xFF030E2F),
         body: Center(
           child: CircularProgressIndicator(color: Colors.white),

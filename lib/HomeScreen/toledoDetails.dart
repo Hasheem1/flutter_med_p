@@ -12,6 +12,7 @@ class ToledoDetails extends StatefulWidget {
 }
 
 class _DetailsState extends State<ToledoDetails> {
+  String selectedStadium="Toledo Stadium";
   static const List<String> sampleImages = [
 "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/490061467_2137491190027449_2294138513476869834_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeFJT9q7Z6Ozbxp9G4-BXCjDB6R9JrG_yJ0HpH0msb_InbkZBC67SLizmUKQ_G-PYvbkgSbHTuivlHXs3VCVNJ52&_nc_ohc=u27vQYaBpkcQ7kNvwH5djCB&_nc_oc=AdklTQtjWqXrHeTqTSfQ3sOl5ZT2ZGx0Vs-Kup1D5Vr03zzgevdehMwVm-m6Mn4mJrAgzNaJkSHZfgPAjRNLL1XD&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=W0ZkxMSKJCn1egnjIq9NHg&oh=00_AfJfYch456GKHDVSQutK36O71vE3VXgC6XGheHGejb5Tug&oe=6838EAD6",
 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk1hBkeQPsPqhZ2otlJVjC2kS8PQYQD0PQTw&s",
@@ -90,7 +91,7 @@ class _DetailsState extends State<ToledoDetails> {
                 SizedBox(height: 20,),
                 Center(
                   child: TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationScreen(selectedStadium),));
                   }, child: Text("BOOK Toledo stadium",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
                     , style: TextButton.styleFrom(
                         foregroundColor: Colors.white,

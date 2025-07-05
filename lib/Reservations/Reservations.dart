@@ -3,43 +3,56 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ReservationScreen extends StatefulWidget {
+  String? selectedStadium;
+  ReservationScreen(this.selectedStadium);
   @override
   _ReservationScreenState createState() => _ReservationScreenState();
 }
 
 class _ReservationScreenState extends State<ReservationScreen> {
   final Map<String, Map<String, Map<String, List<String>>>> availability = {
-    'Stadium A': {
+    'Hashem Stadium': {
       '15/6': {
-        'hours': ['10:00 AM', '1:00 PM'],
+        'hours': ['10:00 AM - 11:30 AM', '1:00 PM - 2:30 PM'],
         'years': ['2025'],
+        'price': ['2 JD']
       },
       '16/6': {
-        'hours': ['2:00 PM', '4:00 PM'],
+        'hours': ['2:00 PM - 3:30 PM', '4:00 PM - 5:30 PM'],
         'years': ['2025'],
+        'price': ['2 JD']
       },
     },
-    'Stadium B': {
+    'Toledo Stadium': {
       '17/6': {
-        'hours': ['12:00 PM', '3:00 PM'],
+        'hours': ['12:00 PM - 1:30 PM', '3:00 PM - 4:30 PM'],
         'years': ['2025'],
+        'price': ['3 JD']
       },
     },
-    'Stadium C': {
+    'Yarmouk Stadium': {
       '18/6': {
-        'hours': ['9:00 AM', '6:00 PM'],
+        'hours': ['9:00 AM - 10:30 AM', '6:00 PM - 7:30 PM'],
         'years': ['2025'],
+        'price': ['2.5 JD']
       },
     },
   };
 
-  String selectedStadium = 'Stadium A'; // Default stadium
+  late String selectedStadium;
   String? selectedDay;
   String? selectedHour;
   String? selectedYear;
+  String? selectedPrice;
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final String? userEmail = FirebaseAuth.instance.currentUser?.email;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedStadium = widget.selectedStadium ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,24 +63,22 @@ class _ReservationScreenState extends State<ReservationScreen> {
     List<String> years = (selectedDay != null)
         ? availability[selectedStadium]![selectedDay]!['years']!
         : [];
+    List<String> price = (selectedDay != null)
+        ? availability[selectedStadium]![selectedDay]!['price']!
+        : [];
 
     return Scaffold(
       backgroundColor: Color(0xFF030E2F),
       appBar: AppBar(
-
         backgroundColor: Color(0xFF030E2F),
-        iconTheme: IconThemeData(color: Colors.white, size: 30),
-        title: Text(
-          'Reservations',
-          style: TextStyle(color: Colors.white, fontSize: 30),
-        ),
+        iconTheme: IconThemeData(color: Colors.white, size: 30,),
+        title: Text('Reservations',
+            style: TextStyle(color: Colors.white, fontSize: 30)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 100),
         child: Column(
           children: [
-            // Removed stadium selection dropdown
-
             DropdownButtonFormField<String>(
               decoration: InputDecoration(
                 labelText: 'Select Day',
@@ -85,6 +96,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   selectedDay = value;
                   selectedHour = null;
                   selectedYear = null;
+                  selectedPrice = null;
                 });
               },
             ),
@@ -118,35 +130,39 @@ class _ReservationScreenState extends State<ReservationScreen> {
               }).toList(),
               onChanged: (value) => setState(() => selectedYear = value),
             ),
+            SizedBox(height: 30),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                labelText: 'Price',
+                labelStyle: TextStyle(color: Colors.white, fontSize: 23),
+              ),
+              value: selectedPrice,
+              items: price.map((p) {
+                return DropdownMenuItem(
+                  value: p,
+                  child: Text(p, style: TextStyle(color: Color(0xFF94e3a8))),
+                );
+              }).toList(),
+              onChanged: (value) => setState(() => selectedPrice = value),
+            ),
             SizedBox(height: 40),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF94e3a8)),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF94e3a8)),
               onPressed: () async {
-                if (selectedDay != null && selectedHour != null && selectedYear != null) {
+                if (selectedDay != null &&
+                    selectedHour != null &&
+                    selectedYear != null &&
+                    selectedPrice != null) {
                   await addReservation();
-
-                  showDialog(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                      title: Text('Reservation Confirmed'),
-                      content: Text(
-                        'Stadium: $selectedStadium\nDay: $selectedDay\nHour: $selectedHour\nYear: $selectedYear',
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text('OK'),
-                        )
-                      ],
-                    ),
-                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Please select all fields')),
                   );
                 }
               },
-              child: Text('Confirm Reservation', style: TextStyle(color: Colors.white, fontSize: 20)),
+              child: Text('Confirm Reservation',
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
             )
           ],
         ),
@@ -155,39 +171,100 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   Future<void> addReservation() async {
-    if (selectedDay == null || selectedHour == null || selectedYear == null || selectedStadium == null) return;
+    if (selectedDay == null ||
+        selectedHour == null ||
+        selectedYear == null ||
+        selectedStadium.isEmpty ||
+        selectedPrice == null) return;
 
-    // Convert day (e.g. 15/6) into full date string (e.g. 2025-06-15)
     List<String> dayParts = selectedDay!.split('/');
     String formattedDate =
         '${selectedYear!}-${dayParts[1].padLeft(2, '0')}-${dayParts[0].padLeft(2, '0')}';
 
-    Map<String, dynamic> reservationData = {
-      'stadiumId': selectedStadium,
-      'day': formattedDate,
-      'time': selectedHour,
-      'year': selectedYear,
-      'price': 50,
-      'status': 'confirmed',
-    };
+    String sharedSlotId = '${selectedStadium}_$formattedDate\_$selectedHour';
+    final sharedSlotDoc = firestore.collection('shared_reservations').doc(sharedSlotId);
 
     try {
-      // Get existing reservations count
-      final reservationCollection = firestore
-          .collection('userCollection')
-          .doc(userEmail)
-          .collection('reservation');
+      await firestore.runTransaction((transaction) async {
+        // Step 1: Check if user already booked the same slot
+        final reservationCollection = firestore
+            .collection('userCollection')
+            .doc(userEmail)
+            .collection('reservation');
 
-      final snapshot = await reservationCollection.get();
-      int reservationCount = snapshot.docs.length;
+        final existingReservationQuery = await reservationCollection
+            .where('stadiumId', isEqualTo: selectedStadium)
+            .where('day', isEqualTo: formattedDate)
+            .where('time', isEqualTo: selectedHour)
+            .where('year', isEqualTo: selectedYear)
+            .get();
 
-      // Create new document with name like 'reservation1', 'reservation2', etc.
-      String newDocName = 'reservation${reservationCount + 1}';
+        if (existingReservationQuery.docs.isNotEmpty) {
+          throw Exception('You have already booked this time slot.');
+        }
 
-      await reservationCollection.doc(newDocName).set(reservationData);
-      print('Reservation added as $newDocName');
+        // Step 2: Check current number of players
+        final snapshot = await transaction.get(sharedSlotDoc);
+        int currentCount = 0;
+        if (snapshot.exists) {
+          currentCount = snapshot.data()?['players_counter'] ?? 0;
+        }
+
+        if (currentCount == 12) {
+          throw Exception('This slot is fully booked (12 players).');
+        }
+
+        // Step 3: Proceed with booking
+        transaction.set(
+          sharedSlotDoc,
+          {'players_counter': currentCount + 1},
+          SetOptions(merge: true),
+        );
+
+        Map<String, dynamic> reservationData = {
+          'stadiumId': selectedStadium,
+          'day': formattedDate,
+          'time': selectedHour,
+          'year': selectedYear,
+          'price': selectedPrice,
+          'status': 'confirmed',
+          'user time booked': DateTime.now(),
+          'players counter': currentCount + 1,
+        };
+
+        final userSnapshot = await reservationCollection.get();
+        int reservationCount = userSnapshot.docs.length;
+        String newDocName = 'reservation${reservationCount + 1}';
+
+        transaction.set(
+          reservationCollection.doc(newDocName),
+          reservationData,
+        );
+      });
+
+      // Show confirmation dialog
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Reservation Confirmed'),
+          content: Text(
+            'Stadium: $selectedStadium\nDay: $selectedDay\nHour: $selectedHour\nYear: $selectedYear\nPrice: $selectedPrice',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+
+      print('Reservation completed.');
     } catch (error) {
-      print('Failed to add reservation: $error');
+      print('Reservation failed: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.toString())),
+      );
     }
   }
 

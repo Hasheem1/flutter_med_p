@@ -5,13 +5,14 @@ import '../Customizedwidget/BookSnackBar.dart';
 import '../Reservations/Reservations.dart';
 
 class YarmoukDetails extends StatefulWidget {
-  const YarmoukDetails({super.key});
-
+   YarmoukDetails({super.key});
   @override
   State<YarmoukDetails> createState() => _DetailsState();
 }
 
 class _DetailsState extends State<YarmoukDetails> {
+  String selectedStadium= "Yarmouk Stadium";
+
   static const List<String> sampleImages = [
    "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/464703683_8545439838878962_2837724231012393494_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG4fN7m3HoqAvUZuT0z9uqwQ9H9sC_RacxD0f2wL9FpzG6yfCbRSfrsUdMO7bUsaJz5R-wGY-bOao5rijyvCMOG&_nc_ohc=xcJTMVDStkwQ7kNvwEy0YhQ&_nc_oc=AdnsQo2Ssv3kEjOo5GSc4cKbKI-ZPneYID4bezcPQcBHb8AzyaRJ_LzlrTIvkAm5hi2UuT_F0rb1rZwtWWdgTRG7&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=wT5H79qrBYkemPHeN97g3w&oh=00_AfIuf2UtcF2q7szogLdWFWoqLJdXP4wD6wi-XDiHbKzv5A&oe=6838FC3C",
     "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/464447981_8535832423173037_5287080858927625173_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGzO8Z0HjYqviVA-ss1wPFwhEs6uf6hA9GESzq5_qED0ajiTDmL2zVV5FH6UPMnx3GistZmk7HpDhGBWrwMUpZW&_nc_ohc=xca_8Jj8RRgQ7kNvwHvZs6-&_nc_oc=Adm6C_vujCtXnbdYvjXhWFJHgzPMFdhAsU2SXPBAtidKviMtXrNAxkLB3DlqR5mTGpbCxOYgKpxg-5CHeR1xXd9S&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=kv8pFkgplXatI_5v7vd5Fg&oh=00_AfIvKm-LYD1ln8fpkkgb4Pbd-lIBVMlLT-zWSdBEiO_h1A&oe=6838F860",
@@ -87,7 +88,7 @@ class _DetailsState extends State<YarmoukDetails> {
                 SizedBox(height: 20,),
                 Center(
                   child: TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationScreen(selectedStadium),));
                   }, child: Text("BOOK Yarmouk stadium",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
                     , style: TextButton.styleFrom(
                         foregroundColor: Colors.white,

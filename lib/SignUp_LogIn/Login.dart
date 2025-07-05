@@ -31,8 +31,6 @@ class _LoginscreenState extends State<Loginscreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isObscured = true;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -199,19 +197,19 @@ class _LoginscreenState extends State<Loginscreen> {
     try {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('userCollection')
-          .where('email', isEqualTo: email)
+          .where('email',isEqualTo: email)
           .limit(1)
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {
-        print("Email exists in userCollection");
+        print("-----------------------------------------------");
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => Bottomtest(),
           ),
         );
       } else {
-        print("Email not found, go to data collection");
+        print("/////////////////////////////////////////////////");
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => data.UserInfo(
@@ -225,7 +223,7 @@ class _LoginscreenState extends State<Loginscreen> {
         );
       }
     } catch (e) {
-      print("Error checking user existence: $e");
+      print("Error checking user existence0000000000000000000000000000000000000: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error checking user data.'),

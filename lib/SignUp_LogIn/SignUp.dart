@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
@@ -147,7 +148,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Future SignUp(String email, String pass) async {
+  Future<void> SignUp(String email, String pass) async {
     try {
       final credential = await auth.FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -155,10 +156,28 @@ class _SignUpState extends State<SignUp> {
         password: pass,
       );
 
-      // Navigate to HomeScreen after successful signup
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Loginscreen(name: "name", age: "age", position: "position", rate: "rate", proOrNo: "proOrNo")));
+      // Save user data to Firestore
+      await FirebaseFirestore.instance
+          .collection('userCollection')
+          .doc(credential.user!.uid)
+          .set({
+        'email': email,
+        'uid': credential.user!.uid,
 
+      });
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Loginscreen(
+            name: "name",
+            age: "age",
+            position: "position",
+            rate: "rate",
+            proOrNo: "proOrNo",
+          ),
+        ),
+      );
     } on auth.FirebaseAuthException catch (e) {
       String errorMsg = '';
       if (e.code == 'weak-password') {
@@ -172,40 +191,31 @@ class _SignUpState extends State<SignUp> {
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(errorMsg),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text(errorMsg)),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('An unexpected error occurred.'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text("An unexpected error occurred.")),
       );
-      print(e);
     }
   }
+
+  }
   Future<auth.UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-    // Create a new credential
     final credential = auth.GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
 
-    // Once signed in, return the UserCredential
     return await auth.FirebaseAuth.instance.signInWithCredential(credential);
 
 
   }
 
 
-}
+
 

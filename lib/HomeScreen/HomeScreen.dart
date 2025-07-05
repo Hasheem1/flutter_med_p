@@ -22,10 +22,10 @@ class _HomescreenState extends State<Homescreen> {
   bool FavIconPressed = false;
   Color color =  Colors.white;
 //FavIconPressed ? Colors.red :
-  final List<Map<String, dynamic>> stadiums = [
+  final List <Map<String, dynamic>> stadiums = [
     {
       "networkImage":
-      "https://scontent.famm6-1.fna.fbcdn.net/v/t39.30808-6/294830913_526610772522619_5920334590357221201_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHs3Apcvj-BOtlxRZIPbBA_vE3qtxOg9VK8Teq3E6D1UnHNga8z7rV5VracSDantNaB8t4DFqdvEP4ZqiIzQDQt&_nc_ohc=M3Bx2CpbH_AQ7kNvwHMuQFX&_nc_oc=AdnIscWKGPZrJ4p8z9CxS1St-Y0gPs4HK8i_hjpCV9p-MCEnPpdsAl4Nb2rLsJ5n-tWMvk98nEAx6rfqUoL-6Eif&_nc_zt=23&_nc_ht=scontent.famm6-1.fna&_nc_gid=M2PlIl78TOMi5rxuv8PzeQ&oh=00_AfKAeTMWUrNAe21AFD5Qs9q7FvZf05nTbMsDvjHKp5oSbw&oe=6838E554",
+      "assets/image/HashemImages/hashemStLogo.jpg",
       "text": "Hashem Stadium",
       "targetScreen": HashemDetails(),
       'isFavorite': false
