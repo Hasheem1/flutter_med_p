@@ -5,6 +5,7 @@ import 'package:flutter_med_p/SignUp_LogIn/enterState.dart';
 import 'package:flutter_med_p/settings/support/Faq%20S.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'App Settings/Languge.dart';
 import 'Legal/Rules Book.dart';
 import 'Legal/Terms&conditions.dart';
 import 'Legal/privacy&policy.dart';
@@ -51,11 +52,15 @@ class _SettingsState extends State<Settings> {
                     child: Text("APP SETTINGS ",
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
                   ),
-                  AccountTile(
-                      title: "language",
-                      leadingIcon: Icons.language_sharp,
-                      accentColor: accentColor,
-                      textColor: textColor),
+                  InkWell(
+                    onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>SelectLanguageScreen()));
+                    },
+                    child: AccountTile(
+                        title: "language",
+                        leadingIcon: Icons.language_sharp,
+                        accentColor: accentColor,
+                        textColor: textColor),
+                  ),
                   SizedBox(height: 20),
                   Container(
                     alignment: Alignment.topLeft,
