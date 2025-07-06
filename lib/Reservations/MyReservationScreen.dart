@@ -1,13 +1,49 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class ReservationBooked extends StatelessWidget {
+class ReservationBooked extends StatefulWidget {
   final String userEmail;
 
   ReservationBooked({required this.userEmail});
 
+  @override
+  State<ReservationBooked> createState() => _ReservationBookedState();
+}
+
+class _ReservationBookedState extends State<ReservationBooked> {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String username = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUsername();
+  }
+  Future<void> fetchUsername() async {
+    try {
+      DocumentSnapshot snapshot = await firestore
+          .collection('userCollection')
+          .doc(widget.userEmail)
+          .get();
+
+      setState(() {
+        username = snapshot.get('name') ?? '';
+      });
+    } catch (e) {
+      print('Failed to fetch username: $e');
+    }
+  }
   Future<List<Map<String, dynamic>>> getReservationDetails(String userEmail) async {
+
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final DocumentSnapshot snapshot =
+    await firestore.collection('userCollection').doc(userEmail).get();
+    final username = snapshot.get('name').toString(); // or snapshot['name']
+
+
+
+
+
 
     try {
       final reservationCollection = firestore
@@ -37,13 +73,13 @@ class ReservationBooked extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
         title: Center(
           child: Text(
-            'Reservations',
+            '$username Matches ',
             style: TextStyle(color: Colors.white, fontSize: 28),
           ),
         ),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: getReservationDetails(userEmail),
+        future: getReservationDetails(widget.userEmail),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator(color: Colors.white));
@@ -75,7 +111,7 @@ class ReservationBooked extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            'Reservation ${index + 1}',
+                            'Match ${index + 1}',
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
@@ -99,7 +135,7 @@ class ReservationBooked extends StatelessWidget {
                         if (res.containsKey('price'))
                           Text('💰 Price: ${res['price']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                         if (res.containsKey('players counter'))
-                          Text('👥 Players number: ${res['players counter']}', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
+                          Text('👥  ${res['players counter']} / 12', style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),

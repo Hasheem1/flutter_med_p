@@ -137,7 +137,7 @@ class _BottomtestState extends State<Bottomtest> {
           BottomNavigationBarItem(
             backgroundColor: Color(0xFF030E2F),
             icon: Icon(Icons.calendar_month),
-            label: 'Reservation',
+            label: 'Matches',
           ),
           BottomNavigationBarItem(
             backgroundColor: Color(0xFF030E2F),

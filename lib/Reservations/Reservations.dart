@@ -234,7 +234,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
         final userSnapshot = await reservationCollection.get();
         int reservationCount = userSnapshot.docs.length;
-        String newDocName = 'reservation${reservationCount + 1}';
+        String newDocName = 'match${reservationCount + 1}';
 
         transaction.set(
           reservationCollection.doc(newDocName),
